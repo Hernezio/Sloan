@@ -52,7 +52,7 @@
 		<link rel="stylesheet" href="sass/custom.css">
 
 		<title>Recuperar contraseña</title>
-		<link rel="shortcut icon" href="img/Logo.png">
+		<link rel="shortcut icon" href="img/LogoType.png">
 	</head>
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
 		<div class="container position-relative">

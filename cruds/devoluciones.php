@@ -31,21 +31,20 @@
         <link rel="stylesheet" href="../sass/custom.css">
         
 		<title>Devoluciones Sloan</title>
-		<link rel="shortcut icon" href="../img/Logo.png">
+		<link rel="shortcut icon" href="../img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
 
-		<!-- Contenedor #1 -->
-		<div class="container-fluid">
-            
+        <!-- Contenedor #1 -->
+        <div class="container-fluid">
             <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
-                        <a class="navbar-brand" href="../home1.php">
-                            <span><i class="fas fa-home"></i></span>
+                        <a class="navbar-brand justify-content-center align-items-center" href="../home1.php">
+                            <span><i class="fas fa-home fa-2x"></i></span>
+                            <h2 class="text-white h2 text-center d-inline">Administrador</h2>
                         </a>
-                        <h2 class="text-white h2 text-center">Administrador</h2>
                         <button class="navbar-toggler border-white" 
                             type="button" 
                             data-toggle="collapse" 
@@ -65,13 +64,13 @@
                                 <li class="nav-item"><a class="nav-link text-white h6" href="inventario.php">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h6" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="../ingresoUsuarios.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="../index.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
-        </div>   
+        </div> 
 
         <!-- CARRUSEL CON BOTON DE BUSQUEDA -->
         <div class="carousel slide" data-bs-ride="carousel">

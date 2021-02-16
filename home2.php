@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="sass/custom.css">
         
 		<title>Sloan</title>
-		<link rel="shortcut icon" href="img/Logo.png">
+        <link rel="shortcut icon" href="img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
 

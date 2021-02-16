@@ -15,8 +15,8 @@
 
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <!-- Google Fonts -->
@@ -26,12 +26,12 @@
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
 
-		<!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
         
-		<title>Incidencias Sloan</title>
-		<link rel="shortcut icon" href="../img/Logo.png">
-	</head>
+        <title>Incidencias Sloan</title>
+        <link rel="shortcut icon" href="../img/LogoType.png">
+    </head>
 	<body style="font-family: 'Lato', sans-serif;">
 		<!-- Contenedor #1 -->
 		<div class="container-fluid">
@@ -85,9 +85,9 @@
 							<input type="text" class="form-control mb-5" name="buscar" placeholder="Buscar incidencia" value="<?php if(isset($buscar_text)) echo $buscar_text; ?>">
                             <input type="submit" class="btn btn-warning text-white btn-lg mb-5" name="btn_buscar" value="Buscar">
 	                    </div>
-                        <!-- <div class="col-12">
+                        <div class="col-12">
                             <a href="insert_incidencia.php" class="btn btn-success text-white btn-lg mb-5 ml-3 shadow">Generar incidencia</a>							
-                        </div> -->
+                        </div>
 					</form>
                 </div>
             </div>

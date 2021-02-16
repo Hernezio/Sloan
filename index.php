@@ -56,7 +56,7 @@
 		<link rel="stylesheet" href="sass/custom.css">
 
 		<title>Ingreso de usuarios SLOAN</title>
-		<link rel="shortcut icon" href="img/Logo.png">
+		<link rel="shortcut icon" href="img/LogoType.png">
 	</head>
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
 		
