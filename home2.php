@@ -3,25 +3,19 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
-
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="sass/custom.css">
-        
 		<title>Sloan</title>
         <link rel="shortcut icon" href="img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
-
-        <!-- Contenedor #1 -->
+        <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
@@ -52,7 +46,6 @@
                 </div>
             </div>
         </div>   
-
         <!-- CARRUSEL CON BOTON DE BUSQUEDA -->
         <div class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -69,7 +62,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Contenedor #2 -->
         <div class="container-fluid">
             <!-- OPCIONES -->
@@ -114,7 +106,6 @@
                     </div> 
                 </div>
             </div>
-
             <!-- TITULO TUTORIALES -->
             <div class="row text-center" id="Tut">
                 <div class="col-lg-4 col-1"></div>
@@ -123,7 +114,6 @@
                 </div>
                 <div class="col-lg-4 col-1"></div>
             </div>
-
             <!-- VIDEO TUTORIALES -->
             <div class="row bg-info pt-3">
                 <!-- Video #1 -->
@@ -181,21 +171,7 @@
                     </a>
                 </div>     
             </div>
-
-            <!-- PIE -->
-            <!-- <div class="row border">
-                <div class="col-12">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 bg-white text-light text-center h6">
-                                Todos los derechos reservados
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
-
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="js/popper.min.js"></script>

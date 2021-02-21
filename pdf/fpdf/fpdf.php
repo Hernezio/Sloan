@@ -2,12 +2,12 @@
 /*******************************************************************************
 * FPDF                                                                         *
 *                                                                              *
-* Version: 1.82                                                                *
-* Date:    2019-12-07                                                          *
+* Version: 1.81                                                                *
+* Date:    2015-12-20                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
-define('FPDF_VERSION','1.82');
+define('FPDF_VERSION','1.81');
 
 class FPDF
 {
@@ -66,12 +66,13 @@ protected $ZoomMode;           // zoom display mode
 protected $LayoutMode;         // layout display mode
 protected $metadata;           // document properties
 protected $PDFVersion;         // PDF version number
+protected $utf8;
 
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
 
-function __construct($orientation='P', $unit='mm', $size='A4')
+function __construct($orientation='P', $unit='mm', $size='A4', $utf8 = false)
 {
 	// Some checks
 	$this->_dochecks();
@@ -101,6 +102,7 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->ColorFlag = false;
 	$this->WithAlpha = false;
 	$this->ws = 0;
+	$this->utf8 = $utf8; 
 	// Font path
 	if(defined('FPDF_FONTPATH'))
 	{
@@ -575,6 +577,10 @@ function AcceptPageBreak()
 
 function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='')
 {
+	if($this->utf8)
+	{
+		$txt = utf8_decode($txt);
+	}
 	// Output a cell
 	$k = $this->k;
 	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
@@ -1039,6 +1045,9 @@ protected function _dochecks()
 	// Check mbstring overloading
 	if(ini_get('mbstring.func_overload') & 2)
 		$this->Error('mbstring overloading must be disabled');
+	// Ensure runtime magic quotes are disabled
+	if(get_magic_quotes_runtime())
+		@set_magic_quotes_runtime(0);
 }
 
 protected function _checkoutput()

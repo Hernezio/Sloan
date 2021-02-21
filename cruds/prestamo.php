@@ -146,6 +146,7 @@
                                             }
                                         }
                                     }
+
                                     $sentencia_select=$con->prepare('CALL select_detprest(?)');
                                     $sentencia_select->bindParam(1, $f_dev['id_prestamo'], PDO::PARAM_INT);
                                     $sentencia_select->execute();

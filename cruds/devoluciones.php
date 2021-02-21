@@ -35,9 +35,8 @@
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
 
-        <!-- Contenedor #1 -->
+        <!-- Contenedor #1  NAVBAR -->
         <div class="container-fluid">
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">

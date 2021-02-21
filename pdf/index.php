@@ -1,28 +1,95 @@
 <?php
-	include 'plantilla.php';
-	require 'conexionPDF.php';
-	
-	$query = "SELECT * FROM incidencias";
-	$resultado = $mysqli->query($query);
-	
-	$pdf = new PDF();
-	$pdf->AliasNbPages();
-	$pdf->AddPage();
-	
-	$pdf->SetFillColor(232,232,232);
-	$pdf->SetFont('Arial','B',12);
-	$pdf->Cell(35,6,'Id. Incidencia',1,0,'C',1);
-	$pdf->Cell(40,6, utf8_decode('Id. Devolución'),1,0,'C',1);
-	$pdf->Cell(40,6,'Tipo Incidencia',1,0,'C',1);
-	$pdf->Cell(75,6,'Observaciones',1,1,'C',1);
 
-	$pdf->SetFont('Arial','',10);
-	
-	while($row = $resultado->fetch_assoc()) {
-		$pdf->Cell(35,6,utf8_decode($row['id_incidencia']),1,0,'C');
-		$pdf->Cell(40,6,$row['id_det_devolucion'],1,0,'C');
-		$pdf->Cell(40,6,utf8_decode($row['tipo_incidencia']),1,0,'C');
-		$pdf->Cell(75,6,utf8_decode($row['observaciones']),1,1,'C');
+	require('fpdf/fpdf.php');
+	require 'conexionPDF.php';
+
+	// Porcedimiento que muestra los datos del usuario vinculado a la incidencia
+	$queryUno = "SELECT nombre AS Nombre, apellido AS Apellido, tipo_usuario AS TipoUsuario, fecha_devolucion AS FechaIncidencia FROM usuarios JOIN det_devolucion WHERE id_usuario = 8 AND id_det_devolucion = 99";
+	$resultadoUno = $mysqli->query($queryUno);
+
+	// Procedimiento que muestra los datos de la incidencia
+	$query = "CALL spGenerarInforme(2, 2)";
+	$resultado = $mysqli->query($query);
+	// Definimos el PDF y su estilo
+	$fpdf = new FPDF();
+	$fpdf -> AddPage('A5', 'Letter');
+
+	// Clase para la Cabecera y Pie
+	class pdf extends FPDF {
+		public function header(){
+			$this -> SetFont('Arial', 'B', 14);
+			$this -> Cell(0, 7, 'Informe de Incidencia', 0, 0, 'C');
+			$this ->  Ln();
+			$this -> SetFont('Arial', 'B', 10);
+			$this -> Cell(0, 6, 'Centro de Diseño y Manufactura del Cuero', 0, 0, 'C');
+			$this -> Image('../img/Logo1.png', 175, 5, 30, 20, 'png');
+		}
+		public function footer(){
+			$this -> SetFont('Arial', 'B', 10);
+			$this -> SetY(-15);
+			$this -> SetX(-30);
+			$this -> AliasNbPages();
+			$this->Cell(0,10, 'Pagina '.$this->PageNo().'/{nb}',0,0,'C' );
+		}
 	}
-	$pdf->Output();
+
+	// Contenido
+	$fpdf = new pdf('P', 'mm', 'A5', true);
+	$fpdf -> AddPage('potrait', 'letter');
+	$fpdf -> SetFont('Arial', 'BU', 14);
+	$fpdf -> SetY(40);
+	$fpdf -> SetTextColor(0, 0, 0);
+	$fpdf -> Cell(0, 5, 'Detalles del informe', 0, 0, 'C');
+	$fpdf -> Ln(20);
+
+	// Informacion Usuario
+	$fpdf -> SetFontSize(10);
+	while($row = $resultadoUno->fetch_assoc()) {
+		$fpdf -> SetX(40);
+		$fpdf -> SetFont('Arial', 'B');	
+		$fpdf -> Cell(5, 5, 'Nombre: ');
+		$fpdf -> SetFont('Arial');
+		$fpdf->Cell(70, 5, $row['Nombre'], 0, 0, 'C');
+		$fpdf -> SetX(110);
+		$fpdf -> SetFont('Arial', 'B');	
+		$fpdf -> Cell(5, 5, 'Apellido: ');
+		$fpdf -> SetFont('Arial');
+		$fpdf -> Cell(70, 5, $row['Apellido'], 0, 0, 'C');
+		$fpdf -> Ln(10);
+		$fpdf -> SetX(40);
+		$fpdf -> SetFont('Arial', 'B');	
+		$fpdf -> Cell(5, 5, 'Tipo de Usuario: ');
+		$fpdf -> SetFont('Arial');
+		$fpdf -> Cell(70, 5, $row['TipoUsuario'], 0, 0, 'C');
+		$fpdf -> SetX(110);
+		$fpdf -> SetFont('Arial', 'B');	
+		$fpdf -> Cell(5, 5, 'Fecha Incidencia: ');
+		$fpdf -> SetFont('Arial');
+		$fpdf -> Cell(80, 5, $row['FechaIncidencia'], 0, 0, 'C');
+	}
+	$fpdf -> Ln(20);
+
+	// Tabla
+	$fpdf -> SetFont('Arial', 'B');	
+	$fpdf -> SetFillColor(255, 246, 237);
+	$fpdf -> Cell(30, 10, 'Incidencia Nº', 0, 0, 'C', 1);
+	$fpdf -> Cell(30, 10, 'Articulo', 0, 0, 'C', 1);
+	$fpdf -> Cell(30, 10, 'Descripción', 0, 0, 'C', 1);
+	$fpdf -> Cell(30, 10, 'Categoria', 0, 0, 'C', 1);
+	$fpdf -> Cell(30, 10, 'Tipo', 0, 0, 'C', 1);
+	$fpdf -> Cell(45, 10, 'Observaciones', 0, 0, 'C', 1);
+	$fpdf -> Line(10, 100, 205, 100);
+	$fpdf -> Ln();
+
+	// Registro
+	$fpdf -> SetFillColor(237, 237, 237);
+	while($row = $resultado->fetch_assoc()) {
+		$fpdf->Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);
+		$fpdf->Cell(30, 10, $row['Articulo'], 0, 0, 'C', 1);
+		$fpdf->Cell(30, 10, $row['Descripcion'], 0, 0, 'C', 1);
+		$fpdf->Cell(30, 10, $row['TipoArticulo'], 0, 0, 'C', 1);
+		$fpdf->Cell(30, 10, $row['TipoIncidencia'], 0, 0, 'C', 1);
+		$fpdf->Cell(45, 10, $row['Observaciones'], 0, 0, 'C', 1);
+	}
+	$fpdf -> Output('I', 'Informe Sloan.pdf');
 ?>

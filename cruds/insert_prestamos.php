@@ -2,7 +2,6 @@
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
 
-		
 		// busca un usuario con el carnet ingresado en el input y toma su id de usuario
 		$sentencia_select=$con->prepare('call carnet_id(?)');
 		$sentencia_select->bindParam(1, $_POST['carnet'], PDO::PARAM_INT);
@@ -26,13 +25,14 @@
 			$estado=$sentencia_select->fetchAll();
 
 			foreach ($estado as $f_art) {
-				//comparar articulo con metodo post para saber si esta diponible
-				if ($id_articulo == $f_art['id_articulo']){
 
+				// Comparar articulo con metodo post para saber si esta diponible
+				if ($id_articulo == $f_art['id_articulo']){
 					
-					// este if confirma que el articulo se pueda prestar
+					//  Confirma que el articulo se pueda prestar
 					if ($f_art['disponibilidad']==1 || $f_art['disponibilidad']==1) {
-						//este if confirma que el usuario pueda prestar
+
+						// Confirma que el usuario pueda prestar
 						if ($carnet['tipo_usuario']== 3 ||$carnet['tipo_usuario']== 4 ){
 							
 							// inserta el id de usuario y el de articulo en la tabla de prestamos
@@ -65,39 +65,29 @@
 	
 							header('location: prestamo.php');
 						}else{
-								echo "
-									<div class=\"modal fade\" id=\"error\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
-									<div class=\"modal-dialog\">
-									<div class=\"modal-content\">
-										<div class=\"modal-header\">
-										<h5 class=\"modal-title\" id=\"exampleModalLabel\">Modal title</h5>
-										<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>
-										</div>
-										<div class=\"modal-body\">
-										...
-										</div>
-										<div class=\"modal-footer\">
-										<button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">Close</button>
-										<button type=\"button\" class=\"btn btn-primary\">Save changes</button>
-										</div>
-									</div>
-									</div>
-								</div>
-								
-								";
-						     }
+							echo '<script language="javascript">alert("No estás autorizado para realizar este procedimiento");</script>';
+						}
 					}else {
-							echo "No se puede prestar";
-						  }
-				}else {	
-						echo "articulo no existe";
-					  }
+						echo '<script language="javascript">alert("Este artículo ya esta siendo utilizado");</script>';
+					}
+				}else {
+					echo '<script language="javascript">alert("Este artículo ya esta siendo utilizado");</script>';
+				}
 			}
+		}else {
+			echo '<script language="javascript">alert("El Usuario no existe");</script>';
 
-			
-		}
-		else {
-			echo ("los campos estan vacios o articulo no existe");
+			// echo "
+			// <script language='javascript'>
+			// 	$(document).ready(function(){
+			// 		Swal.fire({        
+	  //       			type: 'success',
+	  //       			title: 'Éxito',
+	  //       			text: '¡Perfecto!',        
+	  //   			});
+			// 	}
+			// </script>
+			// ";
 		}
 	}
 ?>
@@ -107,26 +97,19 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
-
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
-        
 		<title>Préstamos Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
-
-		<!-- Contenedor #1 -->
+		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
-
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
@@ -160,8 +143,7 @@
                 </div>
             </div>
         </div>  
-		
-        <!-- Contenedor #2 -->
+        <!-- Contenedor #2 CARD Generar Préstamo -->
 		<div class="container mt-5">
 			<div class="row text-center pt-5">
 				<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Generar Préstamo</h2>
@@ -174,19 +156,16 @@
 						<div class="card-body">
 							<form class="row g-3" action="" method="POST">
 							<div class="col-md-6">
-									<label for="inputState" class="form-label h5 p-2">Numero carnet:</label>
-									 <input type ="text" name ="carnet" class="form-control" placeholder="Carnet">
-									 
+									<label for="inputState" class="form-label h5 p-2">Carnet:</label>
+									 <input type ="text" name ="carnet" class="form-control" placeholder="Número" required>
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Artículo:</label>
-									<input type ="text" name ="c_barras" class="form-control" placeholder="codigo de barras">
-								 
+									<input type ="text" name="c_barras" class="form-control" placeholder="Código de barras" required>
 								</div>
 								<div class="col-12 text-center">
-									<a href="#error" type="button"  data-toggle="modal" data-target="#exampleModal" name="btn_guardar" value="Guardar" class="btn btn-success text-white btn-lg mb-3 mt-2">Guardar</a>									
+									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white btn-lg mb-3 mt-2">
 								</div>
-								
 							</form>	
 						</div>
 						<div class="card-footer text-muted text-center pt-3">
@@ -206,12 +185,13 @@
 				<div class="col-2"></div>
 			</div>
 		</div>		 
-
-		
 		<!-- Scripts de Bootstrap -->
-			
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>		
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>	
+		<!-- Scripts para las alertas -->
+		<script src="../sweetAlert2/sweetalert2.all.min.js"></script>	
+		<script src="../js/alertas.js"></script>
+		<!-- <script>funcion_javascript()</script> -->
 	</body>
 </html>
