@@ -118,7 +118,7 @@
                             <?php foreach($resultado as $f_dev):?>
                             <tr class="text-center">
                                 <?php
-                                    $sentencia_select=$con->prepare('call p_nombre(?,?)');
+                                    $sentencia_select=$con->prepare('CALL spConsultarNombre(?,?)');
                                     $sentencia_select->bindParam(1, $f_dev['id_usuario'], PDO::PARAM_INT);
                                     $sentencia_select->bindParam(2, $f_dev['id_articulo'], PDO::PARAM_INT);
 
@@ -147,7 +147,7 @@
                                         }
                                     }
 
-                                    $sentencia_select=$con->prepare('CALL select_detprest(?)');
+                                    $sentencia_select=$con->prepare('CALL spConsultarDetallePrestamo(?)');
                                     $sentencia_select->bindParam(1, $f_dev['id_prestamo'], PDO::PARAM_INT);
                                     $sentencia_select->execute();
                                     $detalle = $sentencia_select->fetchAll();

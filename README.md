@@ -4,6 +4,8 @@ SLOAN es un proyecto en el cual se trabaja en grupo, somos tres integrantes y es
 
 PENDIENTES
 
-Que cuando ingrese mas de 10 digitos en la contraseña mande un aviso
+Organizar SELECT's, que no ingrese con el nombre sino con el carnet y cambiar nombre a variable 'nUsuario' del archivo index.php
 
-Eliminar Archivos que no se van a usar
+Organizar SELECT's del archivo restaurarPassword.php
+
+Intentar Organizar Procedimientos en los archivos prestamos.php y insert_prestamos.php

@@ -7,6 +7,10 @@ function funcion_javascript() {
     });
 }
 
-function llamado(){
-	alert("Estas de acuerdo");
+function funcion_javascript() {
+	Swal.fire(
+	  'Recuerda!',
+	  'Tu contaseña debe tener 10 digitos o menos',
+	  'warning'
+	);
 }

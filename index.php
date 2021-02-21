@@ -4,8 +4,8 @@
 	// Variables
 	$claseUsuario = "class = \"form-control mt-3 mb-4 pr-3 pl-3\"";
 	$claseContraseña = "class = \"form-control mb-3 pr-3 pl-3\"";
-	$placeholderU = " placeholder=\"Usuario\"";
-	$placeholderP = " placeholder=\"Contraseña\"";
+	$inputUsuario = " placeholder=\"Usuario\"";
+	$inputClave = " placeholder=\"Contraseña\"";
 	$sentencia_select = $con->prepare('SELECT * FROM usuarios ORDER BY id_usuario ASC');
 	$sentencia_select->execute();
 	$resultado = $sentencia_select->fetchAll();
@@ -27,13 +27,13 @@
 						header('location: home2.php');
 					}
 				} else {
-					$placeholderP= "placeholder = \"Contraseña incorrecta\"";
+					$inputClave= "placeholder = \"Contraseña incorrecta\"";
 					$claseContraseña ="class = \"form-control border-danger mb-4\"";
 				}
 			}
 		}
 		if ($arrayVacio <= 0) {
-			$placeholderU= "placeholder = \"Usuario no existe\"";
+			$inputUsuario= "placeholder = \"Usuario no existe\"";
 			$claseUsuario ="class = \"form-control border-danger mt-3 mb-4\"";
 		}
 	}
@@ -63,13 +63,13 @@
 						</div>
 						<div class="card-body">
 							<form method="post" class="form-group">
-								<input name="nUsuario" <?php echo $claseUsuario;?> type="text" <?php echo $placeholderU;?> required>
-								<input name="contraseña" <?php echo $claseContraseña;?> type="password" <?php echo $placeholderP;?> required>
+								<input name="nUsuario" <?php echo $claseUsuario; ?> type="text" <?php echo $inputUsuario; ?> required>
+								<input name="contraseña" <?php echo $claseContraseña; ?> type="password" <?php echo $inputClave; ?> required>
 								<button class="btn btn-success text-white btn-lg mt-3 pr-5 pl-5 mb-2 shadow" id="btnInicio" name="inicio">Ingresar</button>
 							</form>
 						</div>
 						<div class="card-footer pt-4 pb-3">
-							<a href="recuperarContraseña.php" class="h6 text-info text-decoration-none">¿Olvidó su contraseña?</a>				
+							<a href="restaurarPassword.php" class="h6 text-info text-decoration-none">¿Olvidó su contraseña?</a>				
 						</div>
 					</div>
 				</div>

@@ -3,17 +3,17 @@
 	if (isset($_POST['btn_guardar'])){
 
 		// busca un usuario con el carnet ingresado en el input y toma su id de usuario
-		$sentencia_select=$con->prepare('call carnet_id(?)');
-		$sentencia_select->bindParam(1, $_POST['carnet'], PDO::PARAM_INT);
+		$sentencia_select=$con->prepare('CALL spConsultarCarnet(?)');
+		$sentencia_select->bindParam(1, $_POST['_numero_carnet'], PDO::PARAM_INT);
 		$sentencia_select->execute();											
 		$carnet=$sentencia_select->fetch();
 
-		$sentencia_select=$con->prepare('call codigo_barras(?)');
-		$sentencia_select->bindParam(1, $_POST['c_barras'], PDO::PARAM_INT);
+		$sentencia_select=$con->prepare('CALL spConsultarCodigoArticulo(?)');
+		$sentencia_select->bindParam(1, $_POST['_codigo_barras'], PDO::PARAM_INT);
 		$sentencia_select->execute();											
 		$codigo=$sentencia_select->fetch();
 						
-		// lleva los input a dos variables para lluego llevarlas a el procedimiento almacenado
+		// lleva los input a dos variables para luego llevarlas a el procedimiento almacenado
 		$id_articulo=$codigo['id_articulo'];
 		$id_usuario=$carnet['id_usuario'];
 
@@ -36,18 +36,18 @@
 						if ($carnet['tipo_usuario']== 3 ||$carnet['tipo_usuario']== 4 ){
 							
 							// inserta el id de usuario y el de articulo en la tabla de prestamos
-							$sentencia_insert=$con->prepare('CALL prestamos(?,?)');
+							$sentencia_insert=$con->prepare('CALL spAgregarPrestamo(?,?)');
 							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
 							$sentencia_insert->bindParam(2, $id_articulo, PDO::PARAM_INT);
 							$sentencia_insert->execute();
 	
 							// cambia de estado el articulo
-							$sentencia_insert=$con->prepare('CALL estado_prestamo(2,?)');
+							$sentencia_insert=$con->prepare('CALL spEstadoPrestamo(2,?)');
 							$sentencia_insert->bindParam(1, $id_articulo, PDO::PARAM_INT);
 							$sentencia_insert->execute();
 	
 							// cambia de estado el usuario
-							$sentencia_insert=$con->prepare('CALL estado_usuario(2,?)');
+							$sentencia_insert=$con->prepare('CALL spEstadoUsuario(2,?)');
 							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
 							$sentencia_insert->execute();
 	
@@ -57,9 +57,9 @@
 					
 							foreach ($resultado as $fila) {}
 							
-					
+
 							//LLENAR DETALLE PRESTAMO
-							$sentencia_insert=$con->prepare('CALL detalle_prestamo(?)');
+							$sentencia_insert=$con->prepare('CALL spConsultarDetallePrestamo(?)');
 							$sentencia_insert->bindParam(1,$fila['id_prestamo'], PDO::PARAM_INT);
 							$sentencia_insert->execute();
 	
@@ -157,7 +157,7 @@
 							<form class="row g-3" action="" method="POST">
 							<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Carnet:</label>
-									 <input type ="text" name ="carnet" class="form-control" placeholder="Número" required>
+									 <input type ="text" name ="_numero_carnet" class="form-control" placeholder="Número" required>
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Artículo:</label>
