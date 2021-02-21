@@ -33,9 +33,7 @@
 				':estado_usuario'=>$estado_usuario,
 				':contrasenia'=>$contrasenia));
 			header('location: usuarios.php');
-			
-		}
-		else {
+		} else {
 			echo ("los campos estan vacios");
 		}
 	}	
@@ -78,6 +76,7 @@
 			<input type="submit" name="btn_cancelar" value="Cancelar">
 			<a href="usuarios.php">Atras</a>
 		</form>	
+		<!-- Validaciones -->
 		<script>
 			function soloLetras(e){
                 key = e.keyCode || e.which;

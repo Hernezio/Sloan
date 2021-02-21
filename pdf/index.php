@@ -1,19 +1,15 @@
 <?php
-
 	require('fpdf/fpdf.php');
 	require 'conexionPDF.php';
-
 	// Porcedimiento que muestra los datos del usuario vinculado a la incidencia
 	$queryUno = "SELECT nombre AS Nombre, apellido AS Apellido, tipo_usuario AS TipoUsuario, fecha_devolucion AS FechaIncidencia FROM usuarios JOIN det_devolucion WHERE id_usuario = 8 AND id_det_devolucion = 99";
 	$resultadoUno = $mysqli->query($queryUno);
-
 	// Procedimiento que muestra los datos de la incidencia
 	$query = "CALL spGenerarInforme(2, 2)";
 	$resultado = $mysqli->query($query);
 	// Definimos el PDF y su estilo
 	$fpdf = new FPDF();
 	$fpdf -> AddPage('A5', 'Letter');
-
 	// Clase para la Cabecera y Pie
 	class pdf extends FPDF {
 		public function header(){
@@ -32,7 +28,6 @@
 			$this->Cell(0,10, 'Pagina '.$this->PageNo().'/{nb}',0,0,'C' );
 		}
 	}
-
 	// Contenido
 	$fpdf = new pdf('P', 'mm', 'A5', true);
 	$fpdf -> AddPage('potrait', 'letter');
@@ -41,7 +36,6 @@
 	$fpdf -> SetTextColor(0, 0, 0);
 	$fpdf -> Cell(0, 5, 'Detalles del informe', 0, 0, 'C');
 	$fpdf -> Ln(20);
-
 	// Informacion Usuario
 	$fpdf -> SetFontSize(10);
 	while($row = $resultadoUno->fetch_assoc()) {
@@ -68,7 +62,6 @@
 		$fpdf -> Cell(80, 5, $row['FechaIncidencia'], 0, 0, 'C');
 	}
 	$fpdf -> Ln(20);
-
 	// Tabla
 	$fpdf -> SetFont('Arial', 'B');	
 	$fpdf -> SetFillColor(255, 246, 237);
@@ -80,8 +73,8 @@
 	$fpdf -> Cell(45, 10, 'Observaciones', 0, 0, 'C', 1);
 	$fpdf -> Line(10, 100, 205, 100);
 	$fpdf -> Ln();
-
 	// Registro
+	$fpdf -> SetFont('Arial');	
 	$fpdf -> SetFillColor(237, 237, 237);
 	while($row = $resultado->fetch_assoc()) {
 		$fpdf->Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);

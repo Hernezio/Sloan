@@ -1,68 +1,51 @@
 <?php
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
-
 		// busca un usuario con el carnet ingresado en el input y toma su id de usuario
-		$sentencia_select=$con->prepare('CALL spConsultarCarnet(?)');
-		$sentencia_select->bindParam(1, $_POST['_numero_carnet'], PDO::PARAM_INT);
+		$sentencia_select=$con->prepare('call carnet_id(?)');
+		$sentencia_select->bindParam(1, $_POST['carnet'], PDO::PARAM_INT);
 		$sentencia_select->execute();											
 		$carnet=$sentencia_select->fetch();
-
-		$sentencia_select=$con->prepare('CALL spConsultarCodigoArticulo(?)');
-		$sentencia_select->bindParam(1, $_POST['_codigo_barras'], PDO::PARAM_INT);
+		$sentencia_select=$con->prepare('call codigo_barras(?)');
+		$sentencia_select->bindParam(1, $_POST['c_barras'], PDO::PARAM_INT);
 		$sentencia_select->execute();											
-		$codigo=$sentencia_select->fetch();
-						
+		$codigo=$sentencia_select->fetch();		
 		// lleva los input a dos variables para luego llevarlas a el procedimiento almacenado
 		$id_articulo=$codigo['id_articulo'];
 		$id_usuario=$carnet['id_usuario'];
-
 		if (!empty ($id_usuario) && !empty ($id_articulo)){
-			
 			// traer tabla articulo para comparar
 			$sentencia_select = $con->prepare('SELECT * FROM articulos ORDER BY id_articulo ASC');
 			$sentencia_select->execute();
 			$estado=$sentencia_select->fetchAll();
-
 			foreach ($estado as $f_art) {
-
 				// Comparar articulo con metodo post para saber si esta diponible
 				if ($id_articulo == $f_art['id_articulo']){
-					
 					//  Confirma que el articulo se pueda prestar
 					if ($f_art['disponibilidad']==1 || $f_art['disponibilidad']==1) {
-
 						// Confirma que el usuario pueda prestar
 						if ($carnet['tipo_usuario']== 3 ||$carnet['tipo_usuario']== 4 ){
-							
 							// inserta el id de usuario y el de articulo en la tabla de prestamos
-							$sentencia_insert=$con->prepare('CALL spAgregarPrestamo(?,?)');
+							$sentencia_insert=$con->prepare('CALL prestamos(?,?)');
 							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
 							$sentencia_insert->bindParam(2, $id_articulo, PDO::PARAM_INT);
 							$sentencia_insert->execute();
-	
 							// cambia de estado el articulo
-							$sentencia_insert=$con->prepare('CALL spEstadoPrestamo(2,?)');
+							$sentencia_insert=$con->prepare('CALL estado_prestamo(2,?)');
 							$sentencia_insert->bindParam(1, $id_articulo, PDO::PARAM_INT);
 							$sentencia_insert->execute();
-	
 							// cambia de estado el usuario
-							$sentencia_insert=$con->prepare('CALL spEstadoUsuario(2,?)');
+							$sentencia_insert=$con->prepare('CALL estado_usuario(2,?)');
 							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
 							$sentencia_insert->execute();
-	
 							$sentencia_select=$con->prepare('SELECT * FROM prestamos ORDER BY id_prestamo ASC');
 							$sentencia_select->execute();
 							$resultado=$sentencia_select->fetchAll();
-					
 							foreach ($resultado as $fila) {}
-							
-
 							//LLENAR DETALLE PRESTAMO
-							$sentencia_insert=$con->prepare('CALL spConsultarDetallePrestamo(?)');
+							$sentencia_insert=$con->prepare('CALL detalle_prestamo(?)');
 							$sentencia_insert->bindParam(1,$fila['id_prestamo'], PDO::PARAM_INT);
 							$sentencia_insert->execute();
-	
 							header('location: prestamo.php');
 						}else{
 							echo '<script language="javascript">alert("No estás autorizado para realizar este procedimiento");</script>';
@@ -77,17 +60,17 @@
 		}else {
 			echo '<script language="javascript">alert("El Usuario no existe");</script>';
 
-			// echo "
-			// <script language='javascript'>
-			// 	$(document).ready(function(){
-			// 		Swal.fire({        
-	  //       			type: 'success',
-	  //       			title: 'Éxito',
-	  //       			text: '¡Perfecto!',        
-	  //   			});
-			// 	}
-			// </script>
-			// ";
+			/*
+			echo "<script language='javascript'>
+					$(document).ready(function(){
+						Swal.fire({        
+		        			type: 'success',
+		        			title: 'Éxito',
+		        			text: '¡Perfecto!',        
+		    			});
+					}
+				</script>";
+			*/
 		}
 	}
 ?>
@@ -157,7 +140,7 @@
 							<form class="row g-3" action="" method="POST">
 							<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Carnet:</label>
-									 <input type ="text" name ="_numero_carnet" class="form-control" placeholder="Número" required>
+									 <input type ="text" name ="carnet" class="form-control" placeholder="Número" required>
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Artículo:</label>

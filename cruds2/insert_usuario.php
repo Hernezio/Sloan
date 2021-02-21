@@ -1,26 +1,29 @@
 <?php
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
-		$tipo_usuario=$_POST['tipo_usuario'];
-		$nombre=$_POST['nombre'];
-		$apellido=$_POST['apellido'];
-		$numero_carnet=$_POST['numero_carnet'];
-		$estado_usuario=$_POST['estado_usuario'];
-		$contrasenia=$_POST['contrasenia'];
-		if (!empty ($tipo_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($estado_usuario) && !empty($contrasenia)){
-			$insert_usuario= $con-> prepare ('INSERT INTO usuarios(tipo_usuario,nombre,apellido,numero_carnet,estado_usuario,contrasenia) VALUES (:tipo_usuario,:nombre,:apellido,:numero_carnet,:estado_usuario,:contrasenia)');
-			$insert_usuario-> execute(array(			
-			':tipo_usuario'=>$tipo_usuario,
-			':nombre'=>$nombre,
-			':apellido'=>$apellido,
-			':numero_carnet'=>$numero_carnet,
-			':estado_usuario'=>$estado_usuario,
-			':contrasenia'=>$contrasenia
-		));
-		header('location: usuarios.php');
-		}
-		else {
-			echo ("los campos estan vacios");
+		if($_POST['tipo_usuario']== 3 || $_POST['tipo_usuario']== 4){
+			$tipo_usuario=$_POST['tipo_usuario'];
+			$nombre=$_POST['nombre'];
+			$apellido=$_POST['apellido'];
+			$numero_carnet=$_POST['numero_carnet'];
+			$estado_usuario=$_POST['estado_usuario'];
+			$contrasenia=$_POST['contrasenia'];
+			if (!empty ($tipo_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($estado_usuario) && !empty($contrasenia)){
+				$insert_usuario= $con-> prepare ('INSERT INTO usuarios(tipo_usuario,nombre,apellido,numero_carnet,estado_usuario,contrasenia) VALUES (:tipo_usuario,:nombre,:apellido,:numero_carnet,:estado_usuario,:contrasenia)');
+				$insert_usuario-> execute(array(			
+				':tipo_usuario'=>$tipo_usuario,
+				':nombre'=>$nombre,
+				':apellido'=>$apellido,
+				':numero_carnet'=>$numero_carnet,
+				':estado_usuario'=>$estado_usuario,
+				':contrasenia'=>$contrasenia
+				));
+				header('location: usuarios.php');
+			} else {
+				echo ("los campos estan vacios");
+			}
+		} else {
+			echo"el tipo de usuario no se admite";
 		}
 	}
 ?>
@@ -30,31 +33,25 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
-
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
-        
 		<title>Préstamos Sloan</title>
-		<link rel="shortcut icon" href="../img/Logo.png">
+		<link rel="shortcut icon" href="../img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
-		<!-- Contenedor #1 -->
+		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
-            
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="../home1.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
-                            <h2 class="text-white h2 text-center d-inline">Monitor</h2>
+                            <h2 class="text-white h2 text-center d-inline">Administrador</h2>
                         </a>
                         <button class="navbar-toggler border-white" 
                             type="button" 
@@ -81,8 +78,7 @@
                     </nav>
                 </div>
             </div>
-        </div> 
-
+        </div>  
         <!-- Contenedor #2 -->
 		<div class="container mt-5">
 			<div class="row text-center pt-5">
@@ -160,7 +156,6 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
-
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-		<!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="sass/custom.css">
-		<title>Sloan</title>
+        <title>Sloan</title>
         <link rel="shortcut icon" href="img/LogoType.png">
-	</head>
-	<body style="font-family: 'Lato', sans-serif;">
+    </head>
+    <body style="font-family: 'Lato', sans-serif;">
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
@@ -32,12 +32,12 @@
                         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
                             <ul class="navbar-nav text-center">
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/devoluciones.php">Devoluciones</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/prestamo.php">Préstamos</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/inciencia.php">Incidencias</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/devoluciones.php">Devoluciones</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/prestamo.php">Préstamos</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/inciencia.php">Incidencias</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/inventario.php">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h6" href="#Tut">Tutoriales</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/usuarios.php">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li class="nav-item"><a class="nav-link text-white h6" href="index.php">Salir</a></li>
                             </ul>
@@ -70,37 +70,37 @@
                     <div class="container bg-white border shadow p-3 mb-5 bg-white rounded">
                         <div class="row text-center pt-4 pb-lg-4">
                             <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds2/devoluciones.php" class="text-info text-decoration-none">Devoluciones</a></h2>
-                                <p class="text-secondary h6">Úsalo para tener</p>
-                                <p class="text-secondary h6">un registro de las </p>
+                                <h2 class="pb-2"><a href="cruds/devoluciones.php" class="text-info text-decoration-none">Devoluciones</a></h2>
+                                <p class="text-secondary h6">Úsalo para revisar</p>
+                                <p class="text-secondary h6">el registro de las </p>
                                 <p class="text-secondary h6">devoluciones</p>
                             </div>
                             <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds2/prestamo.php" class="text-primary text-decoration-none">Préstamos</a></h2>
-                                <p class="text-secondary h6">Podras generar</p>
+                                <h2 class="pb-2"><a href="cruds/prestamo.php" class="text-primary text-decoration-none">Préstamos</a></h2>
+                                <p class="text-secondary h6">Podras revisar los</p>
                                 <p class="text-secondary h6">préstamos de</p>
                                 <p class="text-secondary h6">artículos audiovisuales</p>
                             </div>
 
                             <div class="col-12 col-md-12 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds2/inciencia.php" class="text-success text-decoration-none">Incidencias </a></h2>
-                                <p class="text-secondary h6">Generá informes y</p>
-                                <p class="text-secondary h6">lleva un registro de</p>
+                                <h2 class="pb-2"><a href="cruds/inciencia.php" class="text-success text-decoration-none">Incidencias </a></h2>
+                                <p class="text-secondary h6">Manten al tanto de daños o perdidas</p>
+                                <p class="text-secondary h6">revisando el registro de</p>
                                 <p class="text-secondary h6">tus incidencias</p>
                             </div>
                         </div> 
                         <div class="row text-center pb-4">
                             <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="cruds2/inventario.php" class="text-warning text-decoration-none">Inventario</a></h2>
-                                <p class="text-secondary h6">Podras</p>
-                                <p class="text-secondary h6">checkear</p>
-                                <p class="text-secondary h6">tu inventario</p>
+                                <h2 class="pb-2"><a href="cruds/inventario.php" class="text-warning text-decoration-none">Inventario</a></h2>
+                                <p class="text-secondary h6">Podras administrar</p>
+                                <p class="text-secondary h6">tu inventario y</p>
+                                <p class="text-secondary h6">agregar articulos audiovisuales</p>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="cruds2/usuarios.php" class="text-danger text-decoration-none">Usuarios</a></h2>
+                                <h2 class="pb-2"><a href="cruds/usuarios.php" class="text-danger text-decoration-none">Usuarios</a></h2>
                                 <p class="text-secondary h6">Úsalo para</p>
                                 <p class="text-secondary h6">crear nuevos</p>
-                                <p class="text-secondary h6">prestadores</p>
+                                <p class="text-secondary h6">monitores</p>
                             </div>
                         </div>         
                     </div> 
@@ -172,9 +172,9 @@
                 </div>     
             </div>
         </div>
-		<!-- Scripts de Bootstrap -->
-		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
-		<script type="text/javascript" src="js/popper.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	</body>
+        <!-- Scripts de Bootstrap -->
+        <script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </body>
 </html>

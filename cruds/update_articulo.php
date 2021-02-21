@@ -83,13 +83,12 @@
 					} 
 				?>
 			</select>	
-
 			<!--boton-->
 			<input type="submit" name="btn_guardar" value="Guardar">
 			<input type="submit" name="btn_cancelar" value="Cancelar">
 			<a href="inventario.php">atras</a>
 		</form>	
-
+		<!-- Alertas -->
 		<script>
 			function soloLetras(e){
                 key = e.keyCode || e.which;
@@ -108,7 +107,6 @@
                     return false;
                 }
             }
-
             function validarNumero(e) {
                 tecla = (document.all) ? e.keyCode : e.which;
                 if (tecla==8) return true; 

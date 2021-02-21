@@ -52,7 +52,7 @@
 	</head>
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
 		<div class="container position-relative">
-			<div class="row mt-5 mt-lg-5 pt-lg-5">
+			<div class="row mt-3 mt-lg-3 pt-lg-5">
 				<!-- Icono Atras -->
 				<div class="col-4 embed-responsive-item">
 					<div class="row mt-5 pt-5 mr-1 text-center align-items-center justify-content-center">

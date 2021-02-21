@@ -12,7 +12,6 @@
 		$id_det_devolucion=$_POST['id_det_devolucion'];
 		$tipo_incidencia=$_POST['tipo_incidencia'];
 		$observaciones=$_POST['observaciones'];
-	
 		$id_incidencia=(int)$_GET['id_incidencia'];
 		if (!empty ($id_incidencia) && !empty ($id_det_devolucion) && !empty ($tipo_incidencia) && !empty($observaciones) && !empty($id_incidencia)){
 			$modificar_articulo= $con-> prepare ('UPDATE incidencias SET 
@@ -26,7 +25,6 @@
 				':observaciones'=> $observaciones
 			));
 			header('location: inciencia.php');
-			
 		} else {
 			echo ("los campos estan vacios");
 		}
@@ -42,7 +40,6 @@
 	<body>
 		<h2>Modificar Incidencia</h2>
 		<form action="" method="post">
-
 			<select name="id_det_devolucion">
 				<option value="0">Selccione Categoria del Articulo</option>
 				<?php 
@@ -55,13 +52,12 @@
 			</select>	
 			<input type="text" name="tipo_incidencia" value=" <?php if($resultado) echo $resultado['tipo_incidencia']; ?>" class="input_text">
 			<input type="text" name="observaciones" value=" <?php if($resultado) echo $resultado['observaciones']; ?>" class="input_text">
-
 			<!--boton-->
 			<input type="submit" name="btn_guardar" value="Guardar">
 			<input type="submit" name="btn_cancelar" value="Cancelar">
 			<a href="inciencia.php">atras</a>
 		</form>	
-
+		<!-- Validaciones -->
 		<script>
 			function soloLetras(e){
                 key = e.keyCode || e.which;
@@ -80,7 +76,6 @@
                     return false;
                 }
             }
-
             function validarNumero(e) {
                 tecla = (document.all) ? e.keyCode : e.which;
                 if (tecla==8) return true; 

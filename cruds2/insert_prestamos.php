@@ -1,53 +1,76 @@
 <?php
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
-
-		//no se coloca el campo primario
-		$id_usuario=$_POST['id_usuario'];
-		$id_articulo=$_POST['id_articulo'];
-
+		// busca un usuario con el carnet ingresado en el input y toma su id de usuario
+		$sentencia_select=$con->prepare('call carnet_id(?)');
+		$sentencia_select->bindParam(1, $_POST['carnet'], PDO::PARAM_INT);
+		$sentencia_select->execute();											
+		$carnet=$sentencia_select->fetch();
+		$sentencia_select=$con->prepare('call codigo_barras(?)');
+		$sentencia_select->bindParam(1, $_POST['c_barras'], PDO::PARAM_INT);
+		$sentencia_select->execute();											
+		$codigo=$sentencia_select->fetch();		
+		// lleva los input a dos variables para luego llevarlas a el procedimiento almacenado
+		$id_articulo=$codigo['id_articulo'];
+		$id_usuario=$carnet['id_usuario'];
 		if (!empty ($id_usuario) && !empty ($id_articulo)){
-			
 			// traer tabla articulo para comparar
 			$sentencia_select = $con->prepare('SELECT * FROM articulos ORDER BY id_articulo ASC');
 			$sentencia_select->execute();
 			$estado=$sentencia_select->fetchAll();
-
 			foreach ($estado as $f_art) {
-				//comparar articulo con metodo post para saber si esta diponible
+				// Comparar articulo con metodo post para saber si esta diponible
 				if ($id_articulo == $f_art['id_articulo']){
-
-					
-
-					if ($f_art['disponibilidad']==2) {
-						
-						// inserta el id de usuario y el de articulo en la tabla de prestamos
-						$sentencia_insert=$con->prepare('CALL prestamos(?,?)');
-						$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
-						$sentencia_insert->bindParam(2, $id_articulo, PDO::PARAM_INT);
-						$sentencia_insert->execute();
-
-						// cambia de estado el articulo
-						$sentencia_insert=$con->prepare('CALL estado_prestamo(1,?)');
-						$sentencia_insert->bindParam(1, $id_articulo, PDO::PARAM_INT);
-						$sentencia_insert->execute();
-
-						// cambia de estado el usuario
-						$sentencia_insert=$con->prepare('CALL estado_usuario(2,?)');
-						$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
-						$sentencia_insert->execute();
-
-						header('location: prestamo.php');
+					//  Confirma que el articulo se pueda prestar
+					if ($f_art['disponibilidad']==1 || $f_art['disponibilidad']==1) {
+						// Confirma que el usuario pueda prestar
+						if ($carnet['tipo_usuario']== 3 ||$carnet['tipo_usuario']== 4 ){
+							// inserta el id de usuario y el de articulo en la tabla de prestamos
+							$sentencia_insert=$con->prepare('CALL prestamos(?,?)');
+							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
+							$sentencia_insert->bindParam(2, $id_articulo, PDO::PARAM_INT);
+							$sentencia_insert->execute();
+							// cambia de estado el articulo
+							$sentencia_insert=$con->prepare('CALL estado_prestamo(2,?)');
+							$sentencia_insert->bindParam(1, $id_articulo, PDO::PARAM_INT);
+							$sentencia_insert->execute();
+							// cambia de estado el usuario
+							$sentencia_insert=$con->prepare('CALL estado_usuario(2,?)');
+							$sentencia_insert->bindParam(1, $id_usuario, PDO::PARAM_INT);
+							$sentencia_insert->execute();
+							$sentencia_select=$con->prepare('SELECT * FROM prestamos ORDER BY id_prestamo ASC');
+							$sentencia_select->execute();
+							$resultado=$sentencia_select->fetchAll();
+							foreach ($resultado as $fila) {}
+							//LLENAR DETALLE PRESTAMO
+							$sentencia_insert=$con->prepare('CALL detalle_prestamo(?)');
+							$sentencia_insert->bindParam(1,$fila['id_prestamo'], PDO::PARAM_INT);
+							$sentencia_insert->execute();
+							header('location: prestamo.php');
+						}else{
+							echo '<script language="javascript">alert("No estás autorizado para realizar este procedimiento");</script>';
+						}
 					}else {
-						echo "error el artculo no esta disponible";
+						echo '<script language="javascript">alert("Este artículo ya esta siendo utilizado");</script>';
 					}
+				}else {
+					echo '<script language="javascript">alert("Este artículo ya esta siendo utilizado");</script>';
 				}
 			}
+		}else {
+			echo '<script language="javascript">alert("El Usuario no existe");</script>';
 
-			
-		}
-		else {
-			echo ("los campos estan vacios");
+			/*
+			echo "<script language='javascript'>
+					$(document).ready(function(){
+						Swal.fire({        
+		        			type: 'success',
+		        			title: 'Éxito',
+		        			text: '¡Perfecto!',        
+		    			});
+					}
+				</script>";
+			*/
 		}
 	}
 ?>
@@ -57,32 +80,25 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
-
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
-        
 		<title>Préstamos Sloan</title>
-		<link rel="shortcut icon" href="../img/Logo.png">
+		<link rel="shortcut icon" href="../img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
-
-		<!-- Contenedor #1 -->
+		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
-
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="../home1.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
-                            <h2 class="text-white h2 text-center d-inline">Monitor</h2>
+                            <h2 class="text-white h2 text-center d-inline">Administrador</h2>
                         </a>
                         <button class="navbar-toggler border-white" 
                             type="button" 
@@ -109,9 +125,8 @@
                     </nav>
                 </div>
             </div>
-        </div>     
-
-        <!-- Contenedor #2 -->
+        </div>  
+        <!-- Contenedor #2 CARD Generar Préstamo -->
 		<div class="container mt-5">
 			<div class="row text-center pt-5">
 				<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Generar Préstamo</h2>
@@ -123,31 +138,13 @@
 						<div class="card-header text-center"></div>
 						<div class="card-body">
 							<form class="row g-3" action="" method="POST">
-								<div class="col-md-6">
-									<label for="inputState" class="form-label h5 p-2">Usuario:</label>
-									<select id="inputState" class="form-select h6" name="id_usuario">
-										<option  value="0" selected class="h6">Seleccione usuario</option>
-										<?php 
-											$query = $con -> prepare("SELECT * FROM usuarios");
-											$query -> execute();
-											foreach ($query as $key ) {
-												echo '<option value ="'.$key[id_usuario].'">'.$key[nombre].'</option>';					 	
-											} 
-										?>
-									</select>
+							<div class="col-md-6">
+									<label for="inputState" class="form-label h5 p-2">Carnet:</label>
+									 <input type ="text" name ="carnet" class="form-control" placeholder="Número" required>
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Artículo:</label>
-									<select id="inputState" class="form-select h6" name="id_articulo">
-										<option  value="0" selected class="h6">Seleccione Artículo</option>
-										<?php 
-											$query = $con -> prepare("SELECT * FROM articulos");
-											$query -> execute();
-											foreach ($query as $key ) {
-												echo '<option value ="'.$key[id_articulo].'">'.$key[nombre_articulo].'</option>';					 	
-											} 
-										?>
-									</select>
+									<input type ="text" name="c_barras" class="form-control" placeholder="Código de barras" required>
 								</div>
 								<div class="col-12 text-center">
 									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white btn-lg mb-3 mt-2">
@@ -170,11 +167,14 @@
 				</div>
 				<div class="col-2"></div>
 			</div>
-		</div>
-
+		</div>		 
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>	
+		<!-- Scripts para las alertas -->
+		<script src="../sweetAlert2/sweetalert2.all.min.js"></script>	
+		<script src="../js/alertas.js"></script>
+		<!-- <script>funcion_javascript()</script> -->
 	</body>
 </html>

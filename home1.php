@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-		<!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="sass/custom.css">
-		<title>Sloan</title>
+        <title>Sloan</title>
         <link rel="shortcut icon" href="img/LogoType.png">
-	</head>
-	<body style="font-family: 'Lato', sans-serif;">
+    </head>
+    <body style="font-family: 'Lato', sans-serif;">
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
@@ -58,27 +58,7 @@
                         <span class="input-group-text mb-5" id="basic-addon1"><i class="fas fa-search"></i></span>
                         <input type="text" class="form-control mb-5" placeholder="Buscar">
                     </div>
-                    <!-- Boton modal -->
-                    <a href="#ventanaModal" type="button" class="btn btn-warning text-white btn-lg mb-5 shadow" data-toggle="modal" data-target="#exampleModal">Buscar</a>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-warning text-white btn-lg mb-5 shadow">Buscar</button>
                 </div>
             </div>
         </div>
@@ -192,9 +172,9 @@
                 </div>     
             </div>
         </div>
-		<!-- Scripts de Bootstrap -->
-		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
-		<script type="text/javascript" src="js/popper.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	</body>
+        <!-- Scripts de Bootstrap -->
+        <script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </body>
 </html>

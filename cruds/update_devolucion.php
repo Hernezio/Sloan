@@ -9,12 +9,9 @@
 		header('location: devoluciones.php');
 	}
 	if (isset($_POST['btn_guardar'])){
-
 		$id_usuario=$_POST['id_usuario'];
 		$id_articulo=$_POST['id_articulo'];
-		
 		$id_devolucion=(int)$_GET['id_devolucion'];
-
 		if (!empty ($id_devolucion) && !empty ($id_usuario) && !empty ($id_articulo) && !empty($id_devolucion)){
 			$modificar_devolucion= $con-> prepare ('UPDATE devoluciones SET 
 				id_usuario=:id_usuario,
@@ -37,26 +34,19 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
-
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
-        
 		<title>Devoluciones Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoType.png">
 	</head>
 	<body style="font-family: 'Lato', sans-serif;">
-
-		<!-- Contenedor #1 -->
+		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
-            
-            <!-- NAVBAR -->
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center">
@@ -90,7 +80,6 @@
                 </div>
             </div>
         </div>      
-
         <!-- Contenedor #2 -->
 		<div class="container mt-5">
 			<div class="row text-center pt-5">
@@ -153,7 +142,6 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
-
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
