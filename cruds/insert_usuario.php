@@ -1,7 +1,7 @@
 <?php
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
-		if($_POST['tipo_usuario']== 3 || $_POST['tipo_usuario']== 4){
+		if($_POST['tipo_usuario'] == 1){
 			$tipo_usuario=$_POST['tipo_usuario'];
 			$nombre=$_POST['nombre'];
 			$apellido=$_POST['apellido'];
@@ -91,7 +91,7 @@
 						<div class="card-header text-center"></div>
 						<div class="card-body">
 							<form class="row g-3" action="" method="POST">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Tipo de usuario:</label>
 									<select id="inputState" class="form-select h6" name="tipo_usuario">
 										<option  value="0" selected class="h6">Seleccione el rol del usuario</option>
@@ -104,10 +104,9 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 d-none">
 									<label for="inputState" class="form-label h5 p-2">Estado de usuario:</label>
 									<select id="inputState" class="form-select h6" name="estado_usuario">
-										<option value="0">Seleccione el estado del Usuario</option>
 										<?php 
 											$query = $con -> prepare("SELECT * FROM estados");
 											$query -> execute();
@@ -117,7 +116,7 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Número de carnet:</label>
 									<input class="form-control" type="number" name="numero_carnet" placeholder="Digite Numero de carnet" onkeypress="return validarNumero(event)" required>
 								</div>	
@@ -129,7 +128,6 @@
 									<label for="inputState" class="form-label h5 p-2">Apellido:</label>
 									<input class="form-control" type="text" name="apellido" placeholder="Digite Apellido" onkeypress="return soloLetras(event)" required>
 								</div>
-
 								<div class="col-md-4">
 									<label for="inputState" class="form-label h5 p-2">Contraseña:</label>
 									<input class="form-control" type="password" name="contrasenia" placeholder="Digite Contraseña" required>
@@ -160,5 +158,6 @@
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/alertas.js"></script>
 	</body>
 </html>

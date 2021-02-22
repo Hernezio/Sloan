@@ -2,14 +2,14 @@
 	require('fpdf/fpdf.php');
 	require 'conexionPDF.php';
 	// Porcedimiento que muestra los datos del usuario vinculado a la incidencia
-	$queryUno = "SELECT nombre AS Nombre, apellido AS Apellido, tipo_usuario AS TipoUsuario, fecha_devolucion AS FechaIncidencia FROM usuarios JOIN det_devolucion WHERE id_usuario = 8 AND id_det_devolucion = 99";
+	$queryUno = "CALL spDatosInforme(9, 99)";
 	$resultadoUno = $mysqli->query($queryUno);
 	// Procedimiento que muestra los datos de la incidencia
 	$query = "CALL spGenerarInforme(2, 2)";
 	$resultado = $mysqli->query($query);
 	// Definimos el PDF y su estilo
 	$fpdf = new FPDF();
-	$fpdf -> AddPage('A5', 'Letter');
+	$fpdf -> AddPage('potrait', 'Letter');
 	// Clase para la Cabecera y Pie
 	class pdf extends FPDF {
 		public function header(){
@@ -77,12 +77,12 @@
 	$fpdf -> SetFont('Arial');	
 	$fpdf -> SetFillColor(237, 237, 237);
 	while($row = $resultado->fetch_assoc()) {
-		$fpdf->Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);
-		$fpdf->Cell(30, 10, $row['Articulo'], 0, 0, 'C', 1);
-		$fpdf->Cell(30, 10, $row['Descripcion'], 0, 0, 'C', 1);
-		$fpdf->Cell(30, 10, $row['TipoArticulo'], 0, 0, 'C', 1);
-		$fpdf->Cell(30, 10, $row['TipoIncidencia'], 0, 0, 'C', 1);
-		$fpdf->Cell(45, 10, $row['Observaciones'], 0, 0, 'C', 1);
+		$fpdf -> Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);
+		$fpdf -> Cell(30, 10, $row['Articulo'], 0, 0, 'C', 1);
+		$fpdf -> Cell(30, 10, $row['Descripcion'], 0, 0, 'C', 1);
+		$fpdf -> Cell(30, 10, $row['TipoArticulo'], 0, 0, 'C', 1);
+		$fpdf -> Cell(30, 10, $row['TipoIncidencia'], 0, 0, 'C', 1);
+		$fpdf -> Cell(45, 10, $row['Observaciones'], 0, 0, 'C', 1);
 	}
 	$fpdf -> Output('I', 'Informe Sloan.pdf');
 ?>

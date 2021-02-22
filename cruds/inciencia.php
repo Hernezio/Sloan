@@ -97,8 +97,6 @@
                                 <th class="h5" scope="col">Tipo de Incidencia</th>
                                 <th class="h5" scope="col">Observaciones</th>
                                 <th class="h5" scope="col"></i>Informe</th>
-                                <th class="h5" scope="col"><i class="fas fa-exclamation-triangle mr-5"></i></th>
-                                <th class="h5" scope="col"><i class="fas fa-trash-alt"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,8 +108,6 @@
                                 <td class="h6"><?php echo $fila['observaciones']; ?></td>
                                 <!-- BOTONES -->
                                 <td><a href="../pdf/index.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" target="_blank" class="h6 text-success" title="Generar Informe"><i class="fas fa-print"></i></a></td>
-                                <td><a href="update_incidencia.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" class="h6 text-info">Modificar</a></td>
-                                <td><a href="delete_incidencia.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" class="h6 text-danger" onclick="return confirmarEliminar()">Eliminar</a></td>
                             </tr>
                             <?php endforeach ?>
                         </tbody>

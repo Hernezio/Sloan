@@ -98,7 +98,11 @@
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Daño o Perdida?</label>
-									<input class="form-control" type="text" name="tipo_incidencia" placeholder="Ingrese el tipo de incidencia" required>
+									<select class="form-select h6" name="tipo_incidencia" id="inputState">
+										<option value="0">Seleccione una opción</option>
+										<option value="1">Daño</option>
+										<option value="2">Perdida</option>
+									</select>
 								</div>
 								<div class="col-12">
 									<label for="inputState" class="form-label h5 p-2">Observaciones:</label>

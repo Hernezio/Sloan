@@ -1,5 +1,5 @@
 <?php
-   $database="sloan";
+   $database="proyectosloan";
    $usuario="root";
    $password="";
    try{

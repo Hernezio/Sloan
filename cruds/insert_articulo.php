@@ -89,7 +89,7 @@
 						<div class="card-header text-center"></div>
 						<div class="card-body">
 							<form class="row g-3" action="" method="POST">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Categoria:</label>
 									<select id="inputState" class="form-select h6" name="categoria">
 										<option  value="0" selected class="h6">Seleccione categoria del artículo</option>
@@ -102,23 +102,21 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Artículo:</label>
 									<input class="form-control" type="text" name="nombre_articulo" placeholder="Ingrese el nombre del artículo" onkeypress="return soloLetras(event)" required>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Descripción:</label>
 									<input class="form-control" type="text" name="descripcion" placeholder="Ingrese la marca o descripción del articulo" required>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Codigo de barras:</label>
 									<input class="form-control" type="number" name="codigo_barras" placeholder="Codigo de barras" onkeypress="return validarNumero(event)" required>
 								</div>	
-
-								<div class="col-md-4">
+								<div class="col-md-4 d-none">
 									<label for="inputState" class="form-label h5 p-2">Disponibilidad:</label>
 									<select id="inputState" class="form-select h6" name="disponibilidad">
-										<option  value="0" selected class="h6">Seleccione disponibilidad del artículo</option>
 										<?php 
 											$query = $con -> prepare("SELECT * FROM disponibles");
 											$query -> execute();
@@ -128,10 +126,9 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-4 d-none">
 									<label for="inputState" class="form-label h5 p-2">Estado:</label>
 									<select id="inputState" class="form-select h6" name="estado">
-										<option  value="0" selected class="h6">Seleccione estado del artículo</option>
 										<?php 
 											$query = $con -> prepare("SELECT * FROM estados");
 											$query -> execute();
@@ -167,5 +164,6 @@
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/alertas.js"></script>
 	</body>
 </html>

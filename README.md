@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<h6>SLOAN es un proyecto en el cual se trabaja en grupo, somos tres integrantes y estamos a cargo de realizar esta solución para el CDMC ubicado en el SENA de caltrava.</h6>
+		<h6>SLOAN es un proyecto en el cual se trabaja en grupo, somos dos integrantes y estamos a cargo de realizar esta solución para el CDMC ubicado en el SENA de caltrava.</h6>
 	</head>
 	<body>
 		<h1>Pendientes para Hernezio</h1>

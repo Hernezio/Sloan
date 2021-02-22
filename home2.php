@@ -32,12 +32,12 @@
                         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
                             <ul class="navbar-nav text-center">
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/devoluciones.php">Devoluciones</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/prestamo.php">Préstamos</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/inciencia.php">Incidencias</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/devoluciones.php">Devoluciones</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/prestamo.php">Préstamos</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/inciencia.php">Incidencias</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/inventario.php">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h6" href="#Tut">Tutoriales</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds/usuarios.php">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h6" href="cruds2/usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li class="nav-item"><a class="nav-link text-white h6" href="index.php">Salir</a></li>
                             </ul>
