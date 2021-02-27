@@ -36,16 +36,7 @@ function validarNumero(e) {
     return patron.test(te); 
 }
 
-// SweetAlert
-function funcion_javascript() {
-	Swal.fire({        
-        type: 'success',
-        title: 'Éxito',
-        text: '¡Perfecto!',        
-    });
-}
-
-// Sweet Alert 
+// Recoradatorio Contraseña
 function funcion_javascript() {
 	Swal.fire(
 	  'Recuerda!',

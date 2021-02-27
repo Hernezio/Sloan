@@ -49,13 +49,13 @@
                         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="devoluciones.php">Devoluciones</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="prestamo.php">Préstamos</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="inciencia.php">Incidencias</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="inventario.php">Inventario</a></li>
-                                <li class="nav-item"><a class="nav-link text-success h6 disabled" href="usuarios.php">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="devoluciones.php">Devoluciones</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="prestamo.php">Préstamos</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h6" href="../index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
