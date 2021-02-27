@@ -11,15 +11,15 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="sass/custom.css">
         <title>Sloan</title>
-        <link rel="shortcut icon" href="img/LogoType.png">
+        <link rel="shortcut icon" href="img/LogoS.png">
     </head>
     <body style="font-family: 'Lato', sans-serif;">
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
-                    <nav class="navbar navbar-dark align-items-center">
-                        <h2 class="text-white h1 text-center">Sloan</h2>
+                    <nav class="navbar navbar-dark align-items-center p-3">
+                        <h2 class="text-white h1 fw-bold text-center">Sloan</h2>
                         <button class="navbar-toggler border-white" 
                             type="button" 
                             data-toggle="collapse" 
@@ -56,16 +56,16 @@
                     <h1 class="display-2 text-white mb-5">Bienvenido</h1>
                     <div class="input-group mb-3">
                         <span class="input-group-text mb-5" id="basic-addon1"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control mb-5" placeholder="Buscar">
+                        <input type="text" class="form-control mb-5" placeholder="Busqueda como administrador">
                     </div>
-                    <button type="button" class="btn btn-warning text-white btn-lg mb-5 shadow">Buscar</button>
+                    <a href="#opciones" class="btn btn-warning text-white btn-lg mb-5 shadow">Buscar</a>
                 </div>
             </div>
         </div>
         <!-- Contenedor #2 -->
         <div class="container-fluid">
             <!-- OPCIONES -->
-            <div class="row pt-5" style="font-family: 'Yusei Magic', sans-serif;">
+            <div class="row pt-5" id="opciones" style="font-family: 'Yusei Magic', sans-serif;">
                 <div class="col-12">
                     <div class="container bg-white border shadow p-3 mb-5 bg-white rounded">
                         <div class="row text-center pt-4 pb-lg-4">

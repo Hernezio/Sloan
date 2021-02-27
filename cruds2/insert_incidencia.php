@@ -13,9 +13,8 @@
 				':observaciones'=>$observaciones
 			));
 		header('location: inciencia.php');
-		}
-		else {
-			echo ("los campos estan vacios");
+		}else {
+			echo '<script language="javascript">alert("Debe seleccionar detalle de devolución y el tipo de incidencia");</script>';
 		}
 	}
 ?>
@@ -33,14 +32,14 @@
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
 		<title>Préstamos Sloan</title>
-		<link rel="shortcut icon" href="../img/LogoType.png">
+		<link rel="shortcut icon" href="../img/LogoS.png">
 	</head>
-	<body style="font-family: 'Lato', sans-serif;">
-		<!-- Contenedor #1 NAVBAR -->
-		<div class="container-fluid">
+	<body style="font-family: 'Lato', sans-serif; background: -webkit-radial-gradient(top left, white, #669900, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
+        <!-- Contenedor #1 NAVBAR -->
+        <div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
-                    <nav class="navbar navbar-dark align-items-center">
+                    <nav class="navbar navbar-dark align-items-center p-3">
                         <a class="navbar-brand" href="../home1.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
                             <h2 class="text-white h2 text-center d-inline">Administrador</h2>
@@ -70,17 +69,18 @@
                     </nav>
                 </div>
             </div>
-        </div>     
-        <!-- Contenedor #2 CONTENIDO -->
+        </div>      
+        <!-- Contenedor #2 -->
 		<div class="container mt-5">
-			<div class="row text-center pt-5">
-				<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Generar Incidencia</h2>
-			</div>
 			<div class="row pt-3">
 				<div class="col-2"></div>
-				<div class="col-8">
+				<div class="col-8 mt-3">
 					<div class="card border-light">
-						<div class="card-header text-center"></div>
+						<div class="card-header text-center">
+							<div class="row text-center">
+								<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Generar Incidencia</h2>
+							</div>
+						</div>
 						<div class="card-body">
 							<form class="row g-3" action="" method="POST">
 								<div class="col-md-6">
@@ -98,7 +98,11 @@
 								</div>
 								<div class="col-md-6">
 									<label for="inputState" class="form-label h5 p-2">Daño o Perdida?</label>
-									<input class="form-control" type="text" name="tipo_incidencia" placeholder="Ingrese el tipo de incidencia" required>
+									<select class="form-select h6" name="tipo_incidencia" id="inputState">
+										<option value="0">Seleccione una opción</option>
+										<option value="1">Daño</option>
+										<option value="2">Perdida</option>
+									</select>
 								</div>
 								<div class="col-12">
 									<label for="inputState" class="form-label h5 p-2">Observaciones:</label>
@@ -111,12 +115,12 @@
 						</div>
 						<div class="card-footer text-muted text-center pt-3">
 							<div class="row align-items-center">
-								<div class="col-6">
+								<div class="col-6 mb-2">
 									<a href="inciencia.php" class="rounded-circle p-2 bg-success border border-3 border-white text-decoration-none mt-2">
 										<i class="fas fa-chevron-left fa-lg text-white" title="Atras"></i>
 									</a>							
 								</div>
-								<div class="col-6">
+								<div class="col-6 mb-2">
 									<a href="insert_incidencia.php" name="btn_cancelar" class="btn btn-outline-success has-danger d-inline">Limpiar</a>
 								</div>
 							</div>

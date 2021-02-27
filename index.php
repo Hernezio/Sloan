@@ -27,12 +27,14 @@
 						header('location: home2.php');
 					}
 				} else {
+					echo '<script language="javascript">alert("La contraseña es incorrecta");</script>';			
 					$inputClave= "placeholder = \"Contraseña incorrecta\"";
 					$claseContraseña ="class = \"form-control border-danger mb-4\"";
 				}
 			}
 		}
 		if ($arrayVacio <= 0) {
+			echo '<script language="javascript">alert("No se encontro este usuario");</script>';			
 			$inputUsuario= "placeholder = \"Usuario no existe\"";
 			$claseUsuario ="class = \"form-control border-danger mt-3 mb-4\"";
 		}
@@ -49,7 +51,7 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="sass/custom.css">
 		<title>Ingreso de usuarios SLOAN</title>
-		<link rel="shortcut icon" href="img/LogoType.png">
+		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
 		<!-- Targeta con formulario de acceso -->
@@ -59,7 +61,7 @@
 				<div class="col-4 mt-5 mt-lg-5">
 					<div class="card text-center shadow-lg p-3 mb-5 rounded">
 						<div class="card-header">
-							<img width="200" src="img/Logo1.png" class="img-fluid" alt="logo">
+							<img width="200" src="img/LogoSloan.png" class="img-fluid" alt="logo">
 						</div>
 						<div class="card-body">
 							<form method="post" class="form-group">

@@ -22,11 +22,13 @@
 				$modificar_usuario-> execute(array( ':numero_carnet'=>$numero_carnet,':contrasenia'=>$contraseña));
 				header('location: index.php');
 			}else{
+				echo '<script language="javascript">alert("Debes llenar los campos con la misma contraseña");</script>';			
 				$nuevaClave = "class = \"form-control border-danger pr-3 pl-3 mt-3 mb-4\" placeholder=\"Contraseña no coincibe\"";
 				$nuevaClaveComparacion = "class = \"form-control border-danger pr-3 pl-3 mt-3 mb-4\" placeholder=\"Contraseña no coincibe\"";
 			}
 		}
 		if (empty($resultado['numero_carnet'])) {
+			echo '<script language="javascript">alert("No se encontro este usuario");</script>';			
 			$inputCarnet = "class = \"form-control border-danger pr-3 pl-3 mt-3 mb-4\" placeholder=\"Usuario no existe\"";
 		}
 		if(empty($contraseña)){
@@ -48,7 +50,7 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="sass/custom.css">
 		<title>Recuperar contraseña</title>
-		<link rel="shortcut icon" href="img/LogoType.png">
+		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
 		<div class="container position-relative">
@@ -70,7 +72,7 @@
 					<div class="card bg-light text-center shadow-lg p-3 bg-white rounded">
 						<div class="card-header">
 							<h2 class="h2 pt-2">Recuperar contraseña</h2>
-							<img width="200" src="img/Candado.png" class="img-fluid mt-2 mb-2" alt="candado">
+							<img width="200" src="img/LogoCandado.png" class="img-fluid mt-2 mb-2" alt="candado">
 						</div>
 						<div class="card-body">
 							<form method="post" class="form-group">
@@ -89,8 +91,5 @@
 		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="js/popper.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<!-- Scripts para las alertas -->
-		<script src="sweetAlert2/sweetalert2.all.min.js"></script>	
-		<script src="js/alertas.js"></script>
 	</body>
 </html>

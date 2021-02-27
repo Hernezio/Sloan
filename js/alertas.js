@@ -1,3 +1,13 @@
+// Confirma Eliminar
+function confirmarEliminar(){
+    var respuesta = confirm("¿ Estás seguro que deseas eliminar este registro ?");
+    if (respuesta == true){
+        return true;
+    }else {
+        return false;
+    }
+}
+
 // Alerta solo letras
 function soloLetras(e){
     key = e.keyCode || e.which;

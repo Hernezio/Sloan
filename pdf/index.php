@@ -1,12 +1,21 @@
 <?php
 	require('fpdf/fpdf.php');
-	require 'conexionPDF.php';
+	require '../conexion.php';
 	// Porcedimiento que muestra los datos del usuario vinculado a la incidencia
-	$queryUno = "CALL spDatosInforme(9, 99)";
-	$resultadoUno = $mysqli->query($queryUno);
+	// $query = "CALL spDatosInforme(9, 99)";
+	$query = "
+		SELECT 
+			nombre AS Nombre, 
+			apellido AS Apellido, 
+			tipo_usuario AS TipoUsuario, 
+			fecha_devolucion AS FechaIncidencia 
+		FROM usuarios JOIN det_devolucion 
+		WHERE id_usuario = 2 AND id_det_devolucion = 110
+	";
+	$resultado = $con -> query($query);
 	// Procedimiento que muestra los datos de la incidencia
-	$query = "CALL spGenerarInforme(2, 2)";
-	$resultado = $mysqli->query($query);
+	$queryUno = "CALL spGenerarInforme(2, 2)";
+	$resultadoUno = $con -> query($queryUno);
 	// Definimos el PDF y su estilo
 	$fpdf = new FPDF();
 	$fpdf -> AddPage('potrait', 'Letter');
@@ -18,7 +27,7 @@
 			$this ->  Ln();
 			$this -> SetFont('Arial', 'B', 10);
 			$this -> Cell(0, 6, 'Centro de Diseño y Manufactura del Cuero', 0, 0, 'C');
-			$this -> Image('../img/Logo1.png', 175, 5, 30, 20, 'png');
+			$this -> Image('../img/LogoSloan.png', 175, 5, 30, 20, 'png');
 		}
 		public function footer(){
 			$this -> SetFont('Arial', 'B', 10);
@@ -38,7 +47,7 @@
 	$fpdf -> Ln(20);
 	// Informacion Usuario
 	$fpdf -> SetFontSize(10);
-	while($row = $resultadoUno->fetch_assoc()) {
+	while($row = $resultado -> fetch(PDO::FETCH_ASSOC)) {
 		$fpdf -> SetX(40);
 		$fpdf -> SetFont('Arial', 'B');	
 		$fpdf -> Cell(5, 5, 'Nombre: ');
@@ -76,7 +85,7 @@
 	// Registro
 	$fpdf -> SetFont('Arial');	
 	$fpdf -> SetFillColor(237, 237, 237);
-	while($row = $resultado->fetch_assoc()) {
+	while($row = $resultadoUno -> fetch(PDO::FETCH_ASSOC)) {
 		$fpdf -> Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);
 		$fpdf -> Cell(30, 10, $row['Articulo'], 0, 0, 'C', 1);
 		$fpdf -> Cell(30, 10, $row['Descripcion'], 0, 0, 'C', 1);

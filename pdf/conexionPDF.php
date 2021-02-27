@@ -1,6 +1,6 @@
 <?php
-	$mysqli = new mysqli('localhost', 'root', '', 'proyectosloan');
-	if($mysqli->connect_error){
-		die('Error en la conexion' . $mysqli->connect_error);
+	$con = new mysqli('localhost', 'root', '', 'proyectosloan');
+	if($con ->connect_error){
+		die('Error en la conexion' . $con ->connect_error);
 	}
 ?>
