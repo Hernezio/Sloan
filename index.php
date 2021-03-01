@@ -12,13 +12,13 @@
 	// Ciclos donde se verifican los datos
 	if(isset($_POST['inicio'])) {
 		$buscar_text = $_POST['nUsuario'];
-		$select_buscar = $con->prepare('SELECT * FROM usuarios WHERE id_usuario LIKE :campo OR nombre LIKE :campo OR apellido LIKE :campo;');
+		$select_buscar = $con->prepare('SELECT * FROM usuarios WHERE numero_carnet LIKE :campo;');
 		$select_buscar->execute(array(':campo' =>"%".$buscar_text."%"));
 		$resultado = $select_buscar->fetchAll();
 		$arrayVacio = 0;
 		foreach ($resultado as $fila) {
 			$arrayVacio++;
-			if ($fila['nombre'] == $_POST['nUsuario']) {
+			if ($fila['numero_carnet'] == $_POST['nUsuario']) {
 				if ($fila['contrasenia'] == $_POST['contraseña']) {
 					if ($fila['tipo_usuario'] == 1) {
 						header('location: home1.php');

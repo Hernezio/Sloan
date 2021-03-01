@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
-                    <nav class="navbar navbar-dark align-items-center p-3">
+                    <nav class="navbar navbar-dark align-items-center p-2">
                         <h2 class="text-white h1 fw-bold text-center">Sloan</h2>
                         <button class="navbar-toggler border-white" 
                             type="button" 
@@ -32,12 +32,12 @@
                         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
                             <ul class="navbar-nav text-center">
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="cruds/devoluciones.php">Devoluciones</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="cruds/prestamo.php">Préstamos</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="cruds/inciencia.php">Incidencias</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="cruds/inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudAdmin/devoluciones.php">Devoluciones</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudAdmin/prestamo.php">Préstamos</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudAdmin/inciencia.php">Incidencias</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudAdmin/inventario.php">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="#Tut">Tutoriales</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="cruds/usuarios.php">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudAdmin/usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="index.php">Salir</a></li>
                             </ul>
@@ -70,20 +70,20 @@
                     <div class="container bg-white border shadow p-3 mb-5 bg-white rounded">
                         <div class="row text-center pt-4 pb-lg-4">
                             <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds/devoluciones.php" class="text-info text-decoration-none">Devoluciones</a></h2>
+                                <h2 class="pb-2"><a href="crudAdmin/devoluciones.php" class="text-info text-decoration-none">Devoluciones</a></h2>
                                 <p class="text-secondary h6">Úsalo para revisar</p>
                                 <p class="text-secondary h6">el registro de las </p>
                                 <p class="text-secondary h6">devoluciones</p>
                             </div>
                             <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds/prestamo.php" class="text-primary text-decoration-none">Préstamos</a></h2>
+                                <h2 class="pb-2"><a href="crudAdmin/prestamo.php" class="text-primary text-decoration-none">Préstamos</a></h2>
                                 <p class="text-secondary h6">Podras revisar los</p>
                                 <p class="text-secondary h6">préstamos de</p>
                                 <p class="text-secondary h6">artículos audiovisuales</p>
                             </div>
 
                             <div class="col-12 col-md-12 col-lg-4">
-                                <h2 class="pb-2"><a href="cruds/inciencia.php" class="text-success text-decoration-none">Incidencias </a></h2>
+                                <h2 class="pb-2"><a href="crudAdmin/inciencia.php" class="text-success text-decoration-none">Incidencias </a></h2>
                                 <p class="text-secondary h6">Manten al tanto de daños o perdidas</p>
                                 <p class="text-secondary h6">revisando el registro de</p>
                                 <p class="text-secondary h6">tus incidencias</p>
@@ -91,13 +91,13 @@
                         </div> 
                         <div class="row text-center pb-4">
                             <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="cruds/inventario.php" class="text-warning text-decoration-none">Inventario</a></h2>
+                                <h2 class="pb-2"><a href="crudAdmin/inventario.php" class="text-warning text-decoration-none">Inventario</a></h2>
                                 <p class="text-secondary h6">Podras administrar</p>
                                 <p class="text-secondary h6">tu inventario y</p>
                                 <p class="text-secondary h6">agregar articulos audiovisuales</p>
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="cruds/usuarios.php" class="text-danger text-decoration-none">Usuarios</a></h2>
+                                <h2 class="pb-2"><a href="crudAdmin/usuarios.php" class="text-danger text-decoration-none">Usuarios</a></h2>
                                 <p class="text-secondary h6">Úsalo para</p>
                                 <p class="text-secondary h6">crear nuevos</p>
                                 <p class="text-secondary h6">monitores</p>
