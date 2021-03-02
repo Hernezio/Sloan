@@ -119,6 +119,7 @@
                                         $class = "class=\"table-warning fw-bold text-danger\"";
                                         $classt = "class=\"h6 table-warning\"";
                                     }
+                                    if($p_fila['nombre_perfil'] == "Aprendiz" || $p_fila['nombre_perfil'] == "Instructor" || $p_fila['nombre_perfil'] == "Portero"):
                                 ?>
             					<tr class="text-center">
     								<td <?php echo $classt; ?> scope="row">
@@ -142,7 +143,8 @@
     								<!-- BOTONES -->
     								<td <?php echo $class; ?> ><a href="update_usuario.php?id_usuario= <?php echo $fila['id_usuario']; ?>" class="h6 text-warning" ><i class="fas fa-edit fa-lg"></i></a></td>
     								<!-- <td <?php echo $class; ?> ><a href="delete_usuario.php?id_usuario= <?php echo $fila['id_usuario']; ?>" class="h6 text-danger"  onclick="return confirmarEliminar()"><i class="fas fa-trash-alt fa-lg"></i></a></td> -->
-            					</tr>
+                                </tr>
+                                <?php endif ?>
         					<?php endforeach ?>
         				</tbody>
         			</table>

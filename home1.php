@@ -68,7 +68,65 @@
             <div class="row pt-5" id="opciones" style="font-family: 'Yusei Magic', sans-serif;">
                 <div class="col-12">
                     <div class="container bg-white border shadow p-3 mb-5 bg-white rounded">
-                        <div class="row text-center pt-4 pb-lg-4">
+                        <div class="row text-center">
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class="row text-center pt-4 pb-lg-4">
                             <div class="col-12 col-md-6 col-lg-4">
                                 <h2 class="pb-2"><a href="crudAdmin/devoluciones.php" class="text-info text-decoration-none">Devoluciones</a></h2>
                                 <p class="text-secondary h6">Úsalo para revisar</p>
@@ -102,7 +160,7 @@
                                 <p class="text-secondary h6">crear nuevos</p>
                                 <p class="text-secondary h6">monitores</p>
                             </div>
-                        </div>         
+                        </div>  -->        
                     </div> 
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?php
 	include_once "../conexion.php";
 	if (isset($_POST['btn_guardar'])){
-		if($_POST['tipo_usuario'] == 1 || $_POST['tipo_usuario'] == 2){
+		if($_POST['tipo_usuario'] == 1 || $_POST['tipo_usuario'] == 2 || $_POST['tipo_usuario'] == 2){
 			$tipo_usuario=$_POST['tipo_usuario'];
 			$nombre=$_POST['nombre'];
 			$apellido=$_POST['apellido'];
@@ -35,7 +35,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
 		<!-- Bootstrap CSS -->
@@ -87,7 +87,7 @@
 					<div class="card shadow">
 						<div class="card-header text-center">
 							<div class="row text-center">
-								<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Agregar Nuevo Usuario</h2>
+								<h2 class="display-4 text-success" style="font-family: 'Raleway', sans-serif;">Agregar Nuevo Usuario</h2>
 							</div>
 						</div>
 						<div class="card-body">
@@ -100,7 +100,9 @@
 											$query = $con -> prepare("SELECT * FROM perfiles");
 											$query -> execute();
 											foreach ($query as $key ) {
-												echo '<option value ="'.$key[id_perfil].'">'.$key[nombre_perfil].'</option>';					 	
+												if($key[id_perfil] == 1 || $key[id_perfil] == 2 || $key[id_perfil] == 5) {
+													echo '<option value ="'.$key[id_perfil].'">'.$key[nombre_perfil].'</option>';					 	
+												}
 											} 
 										?>
 									</select>

@@ -85,7 +85,7 @@
 					<div class="card shadow">
 						<div class="card-header text-center">
 							<div class="row text-center">
-								<h2 class="display-4 text-success" style="font-family: 'Yusei Magic', sans-serif;">Agregar Nuevo Usuario</h2>
+								<h2 class="display-4 text-success" style="font-family: 'Raleway', sans-serif;">Agregar Nuevo Usuario</h2>
 							</div>
 						</div>
 						<div class="card-body">
@@ -98,7 +98,9 @@
 											$query = $con -> prepare("SELECT * FROM perfiles");
 											$query -> execute();
 											foreach ($query as $key ) {
-												echo '<option value ="'.$key[id_perfil].'">'.$key[nombre_perfil].'</option>';					 	
+												if($key[id_perfil] == 3 || $key[id_perfil] == 4) {
+													echo '<option value ="'.$key[id_perfil].'">'.$key[nombre_perfil].'</option>';					 	
+												}
 											} 
 										?>
 									</select>
@@ -127,10 +129,10 @@
 									<label for="inputState" class="form-label h5 p-2">Apellido:</label>
 									<input class="form-control" type="text" name="apellido" placeholder="Digite Apellido" onkeypress="return soloLetras(event)" required>
 								</div>
-								<div class="col-md-4 d-none">
+								<!-- <div class="col-md-4 d-none">
 									<label for="inputState" class="form-label h5 p-2">Contraseña:</label>
 									<input class="form-control" type="password" name="contrasenia" placeholder="Digite Contraseña" onclick="funcion_javascript()" required>
-								</div>	
+								</div>	 -->
 								<div class="col-12 text-center">
 									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white btn-lg mb-3 mt-2 shadow">
 								</div>
