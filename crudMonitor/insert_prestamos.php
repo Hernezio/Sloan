@@ -105,6 +105,7 @@
                                 <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="prestamo.php">Préstamos</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../home2.php#Tut">Tutoriales</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
