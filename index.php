@@ -21,10 +21,45 @@
 			if ($fila['numero_carnet'] == $_POST['nUsuario']) {
 				if ($fila['contrasenia'] == $_POST['contraseña']) {
 					if ($fila['tipo_usuario'] == 1) {
-						header('location: home1.php');
+						$sesion = "activo";
+						
+						try {
+							$stmt = $con -> prepare('call inicioSesion(?,?)');
+							$stmt -> bindParam(1, $sesion, PDO::PARAM_STR);
+							$stmt -> bindParam(2, $fila['numero_carnet'], PDO::PARAM_STR);
+
+							$stmt -> execute();
+
+							session_start();
+							ob_start();
+							$_SESSION['carnetUsuario'] = $fila['numero_carnet'];
+
+							header('location: crudAdmin/homeAdmin.php');
+
+
+						} catch (PDOException $e) {
+							echo "error en el inicio de sesion".$e -> getMessage();
+						}
 					}
 					if ($fila['tipo_usuario'] == 2) {
-						header('location: home2.php');
+						$sesion = "activo";
+						try {
+							$stmt = $con -> prepare('call inicioSesion(?,?)');
+							$stmt -> bindParam(1, $sesion, PDO::PARAM_STR);
+							$stmt -> bindParam(2, $fila['numero_carnet'], PDO::PARAM_STR);
+							
+
+							$stmt -> execute();
+
+							session_start();
+							ob_start();
+							$_SESSION['carnetUsuario']=$fila['numero_carnet'];
+							
+							header('location: crudMonitor/homeMonitor.php');
+
+						} catch (PDOException $e) {
+							echo "error en el inicio de sesion".$e -> getMessage();
+						}
 					}
 				} else {
 					echo '<script language="javascript">alert("La contraseña es incorrecta");</script>';			

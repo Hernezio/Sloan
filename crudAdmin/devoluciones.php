@@ -10,6 +10,13 @@
         $select_buscar -> execute(array(':campo' =>"%".$buscar_text."%"));
         $tb_dev = $select_buscar -> fetchAll();
     }
+
+    include_once "../confirmarInicio.php";
+
+    $confirmar = new Confirmar();
+
+    if ($confirmar -> verificar() == true):
+
 ?>
 
 <!DOCTYPE html>
@@ -155,46 +162,10 @@
                 </div>
             </div>
             <!-- OPCIONES -->
-            <div class="row mt-5" style="font-family: 'Yusei Magic', sans-serif;">
-                <div class="col-12">
-                    <div class="container bg-dark border shadow p-3 mb-5 rounded">
-                        <div class="row text-center pt-4 pb-lg-4">
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="devoluciones.php" class="text-secondary nav-link disabled text-decoration-none">Devoluciones</a></h2>
-                                <p class="text-secondary h6">Úsalo para tramitar</p>
-                                <p class="text-secondary h6">devoluciones</p>
-                                <p class="text-secondary h6">de artículos</p>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <h2 class="pb-2"><a href="prestamo.php" class="text-primary text-decoration-none">Préstamos</a></h2>
-                                <p class="text-secondary h6">Úsalo para tramitar</p>
-                                <p class="text-secondary h6">préstamos</p>
-                                <p class="text-secondary h6">de artículos</p>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-4">
-                                <h2 class="pb-2"><a href="inciencia.php" class="text-success text-decoration-none">Incidencias </a></h2>
-                                <p class="text-secondary h6">Úsalo para consultar</p>
-                                <p class="text-secondary h6">reportes</p>
-                                <p class="text-secondary h6">de incidencias</p>
-                            </div>
-                        </div> 
-                        <div class="row text-center pt-sm-0 pb-4">
-                            <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="inventario.php" class="text-warning text-decoration-none">Inventario</a></h2>
-                                <p class="text-secondary h6">Úsalo para</p>
-                                <p class="text-secondary h6">administrar</p>
-                                <p class="text-secondary h6">tu inventario</p>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <h2 class="pb-2"><a href="usuarios.php" class="text-danger text-decoration-none">Usuarios</a></h2>
-                                <p class="text-secondary h6">Úsalo para tramitar</p>
-                                <p class="text-secondary h6">administrar</p>
-                                <p class="text-secondary h6">prestadores</p>
-                            </div>
-                        </div>           
-                    </div> 
-                </div>
-            </div>
+            <?php
+        
+                include_once "contenido.plantilla.html"
+            ?>
 		</div>
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
@@ -202,3 +173,11 @@
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	</body>
 </html>
+<?php 
+    endif;
+
+    if ($confirmar -> verificar() == false){
+        header('location: ../index.php');
+    }
+
+?>

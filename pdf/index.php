@@ -1,105 +1,132 @@
 <?php
-	require('fpdf/fpdf.php');
-	require '../conexion.php';
+	
+	require ('fpdf/fpdf.php');	
 
-	// Porcedimiento que muestra los datos del usuario vinculado a la incidencia
-	// $query = "CALL spDatosInforme(9, 99)";
-	$query = "
-		SELECT 
-			nombre AS Nombre, 
-			apellido AS Apellido, 
-			tipo_usuario AS TipoUsuario, 
-			fecha_devolucion AS FechaIncidencia 
-		FROM usuarios JOIN det_devolucion 
-		WHERE id_usuario = 2 AND id_det_devolucion = 110
-	";
-	$resultado = $con -> query($query);
+	class IncidenciaPdf {
 
-	// Procedimiento que muestra los datos de la incidencia
-	$queryUno = "CALL spGenerarInforme(2, 2)";
-	$resultadoUno = $con -> query($queryUno);
+		private $idIncidencia;
 
-	// Definimos el PDF y su estilo
-	$fpdf = new FPDF();
-	$fpdf -> AddPage('potrait', 'Letter');
+		function __construct($idIncidencia){
 
-	// Clase para la Cabecera y Pie
-	class pdf extends FPDF {
-		public function header(){
-			$this -> SetFont('Arial', 'B', 14);
-			$this -> Cell(0, 7, 'Informe de Incidencia', 0, 0, 'C');
-			$this ->  Ln();
-			$this -> SetFont('Arial', 'B', 10);
-			$this -> Cell(0, 6, 'Centro de Diseño y Manufactura del Cuero', 0, 0, 'C');
-			$this -> Image('../img/LogoSloan.png', 175, 5, 30, 20, 'png');
+			$this -> idIncidencia = $idIncidencia;
 		}
-		public function footer(){
-			$this -> SetFont('Arial', 'B', 10);
-			$this -> SetY(-15);
-			$this -> SetX(-30);
-			$this -> AliasNbPages();
-			$this->Cell(0,10, 'Pagina '.$this->PageNo().'/{nb}',0,0,'C' );
+
+		function crearPDF(){
+			include_once "../conexion.php";	
+
+			$query = "call spGenerarInforme(?)";
+
+			try {
+				$stmt = $con -> prepare($query);
+				$stmt -> bindParam(1, $this -> idIncidencia, PDO::PARAM_INT);
+				$stmt -> execute();
+				$incidenciaTable = $stmt -> fetch();
+
+				if($incidenciaTable['tipo_incidencia'] == 1){
+					$tipo = "daño";
+				}else {
+					$tipo = "Perdida";
+				}
+
+				$stmt = $con -> prepare ('call buscarDetDevolucion(?)');
+				$stmt -> bindParam(1, $incidenciaTable['id_det_devolucion'], PDO::PARAM_INT);
+				$stmt -> execute();
+				$detalleDevTable = $stmt -> fetch();
+
+				$stmt = $con -> prepare ('call buscarDevolucion(?)');
+				$stmt -> bindParam(1, $detalleDevTable['id_devolucion'], PDO::PARAM_INT);
+				$stmt -> execute();
+				$devolucionTable = $stmt -> fetch();
+
+				$stmt = $con -> prepare ('call D_nombre(?,?)');
+				$stmt -> bindParam(1, $devolucionTable['id_usuario'], PDO::PARAM_INT);
+				$stmt -> bindParam(2, $devolucionTable['id_articulo'], PDO::PARAM_INT);
+
+				$stmt -> execute();
+				$datosUsuarioDevoluciones = $stmt -> fetch();
+
+				$pdf = new FPDF();
+				$pdf -> Addpage();
+
+				/* ***************************
+				*			Header		  *
+				*************************** */
+				
+				//$pdf->Cell(30,10,'Title',1,0,'C');
+				
+				// Logo
+				$pdf -> Image('../img/logoSloan.png',82,3,40);
+
+				$pdf->	SetTextColor(240, 103, 12);
+				// Arial bold 15
+				$pdf -> SetFont('Arial','B',14);
+				// Movernos a la derecha
+				$pdf -> Cell(80);
+				// Título
+				$pdf -> Write(59,'Incidencia');
+				// Salto de línea
+				$pdf -> Ln(90);
+
+				/* ***************************
+				*			Body		  *
+				*************************** */							
+				
+				//Creamos las celdas para los titulo de cada columna y le asignamos un fondo gris y el tipo de letra
+				$pdf->	SetTextColor(0, 0, 0);
+				$pdf->	SetFillColor(232,232,232);
+				$pdf->	SetFont('Arial','B',10);
+				$pdf-> 	Cell(2);				
+				$pdf->	Cell(92,6,'Id incidencia: '.utf8_decode($incidenciaTable['id_incidencia']),1,0,'L',60);	
+				$pdf->	Cell(92,6,'Tipo incidenacidencia: '.utf8_decode($tipo),1,0,'L',60);					
+				$pdf -> Ln(6);
+
+				$pdf->	SetFillColor(255, 255, 255);
+				$pdf->	SetFont('Arial','B',10);
+				$pdf-> 	Cell(2);				
+				$pdf->	Cell(184,6,'Observaciones: '.utf8_decode($incidenciaTable['observaciones']),1,0,'L',60);
+					
+				$pdf -> Ln(6);
+				
+
+				$pdf->	SetFillColor(232,232,232);
+				$pdf->	SetFont('Arial','B',10);
+				$pdf-> 	Cell(2);				
+				$pdf->	Cell(92,6,'Nombre Aprendiz: '.utf8_decode($datosUsuarioDevoluciones['nombre']),1,0,'L',60);	
+				$pdf->	Cell(92,6,'Apellido Aprendiz: '.utf8_decode($datosUsuarioDevoluciones['apellido']),1,0,'L',60);	
+				
+				$pdf -> Ln(6);
+				
+				$pdf->	SetFillColor(255, 255, 255);
+				$pdf->	SetFont('Arial','B',10);
+				$pdf-> 	Cell(2);				
+				$pdf->	Cell(92,6,'Nombe Articulo: '. utf8_decode($datosUsuarioDevoluciones['nombre_articulo']),1,0,'L',60);
+				$pdf->	Cell(92,6,'Id Articulo: '. utf8_decode($datosUsuarioDevoluciones['codigo_barras']),1,0,'L',60);
+				$pdf -> Ln(20);
+
+				$pdf->	SetFont('Arial','',10);				
+				$pdf -> Write(16,utf8_decode('Mediante la siguiente se informa que el estudiante '.$datosUsuarioDevoluciones['nombre'].' '.$datosUsuarioDevoluciones['apellido'].' con numero de carnet '.$datosUsuarioDevoluciones['numero_carnet']));
+				$pdf -> Ln(8);
+						
+				$pdf -> Write(9,utf8_decode(' tubo una incidencia de tipo '.$tipo.' en la fecha '.$detalleDevTable['fecha_devolucion'].' con el dispositivo '.$datosUsuarioDevoluciones['nombre_articulo']. ' se informa a todos los encargados para tomar las medidas respectivas.'));
+
+
+				
+
+				$pdf -> Output('I', 'Informe Sloan.pdf');
+
+			} catch (PDOException $e) {
+				echo "error en el pdf". $e -> getMessage();
+			}
 		}
+
 	}
 
-	// Contenido
-	$fpdf = new pdf('P', 'mm', 'A5', true);
-	$fpdf -> AddPage('potrait', 'letter');
-	$fpdf -> SetFont('Arial', 'BU', 14);
-	$fpdf -> SetY(40);
-	$fpdf -> SetTextColor(0, 0, 0);
-	$fpdf -> Cell(0, 5, 'Detalles del informe', 0, 0, 'C');
-	$fpdf -> Ln(20);
-
-	// Informacion Usuario
-	$fpdf -> SetFontSize(10);
-	while($row = $resultado -> fetch(PDO::FETCH_ASSOC)) {
-		$fpdf -> SetX(40);
-		$fpdf -> SetFont('Arial', 'B');	
-		$fpdf -> Cell(5, 5, 'Nombre: ');
-		$fpdf -> SetFont('Arial');
-		$fpdf -> Cell(70, 5, $row['Nombre'], 0, 0, 'C');
-		$fpdf -> SetX(110);
-		$fpdf -> SetFont('Arial', 'B');	
-		$fpdf -> Cell(5, 5, 'Apellido: ');
-		$fpdf -> SetFont('Arial');
-		$fpdf -> Cell(70, 5, $row['Apellido'], 0, 0, 'C');
-		$fpdf -> Ln(10);
-		$fpdf -> SetX(40);
-		$fpdf -> SetFont('Arial', 'B');	
-		$fpdf -> Cell(5, 5, 'Tipo de Usuario: ');
-		$fpdf -> SetFont('Arial');
-		$fpdf -> Cell(70, 5, $row['TipoUsuario'], 0, 0, 'C');
-		$fpdf -> SetX(110);
-		$fpdf -> SetFont('Arial', 'B');	
-		$fpdf -> Cell(5, 5, 'Fecha Incidencia: ');
-		$fpdf -> SetFont('Arial');
-		$fpdf -> Cell(80, 5, $row['FechaIncidencia'], 0, 0, 'C');
+	if (isset($_GET['id_incidencia'])){
+		$objPDF = new IncidenciaPdf($_GET['id_incidencia']);
+		$objPDF -> crearPDF();
+		
 	}
-	$fpdf -> Ln(20);
 
-	// Tabla
-	$fpdf -> SetFont('Arial', 'B');	
-	$fpdf -> SetFillColor(255, 246, 237);
-	$fpdf -> Cell(30, 10, 'Incidencia Nº', 0, 0, 'C', 1);
-	$fpdf -> Cell(30, 10, 'Articulo', 0, 0, 'C', 1);
-	$fpdf -> Cell(30, 10, 'Descripción', 0, 0, 'C', 1);
-	$fpdf -> Cell(30, 10, 'Categoria', 0, 0, 'C', 1);
-	$fpdf -> Cell(30, 10, 'Tipo', 0, 0, 'C', 1);
-	$fpdf -> Cell(45, 10, 'Observaciones', 0, 0, 'C', 1);
-	$fpdf -> Line(10, 100, 205, 100);
-	$fpdf -> Ln();
 
-	// Registro
-	$fpdf -> SetFont('Arial');	
-	$fpdf -> SetFillColor(237, 237, 237);
-	while($row = $resultadoUno -> fetch(PDO::FETCH_ASSOC)) {
-		$fpdf -> Cell(30, 10, $row['IdIncidencia'], 0, 0, 'C', 1);
-		$fpdf -> Cell(30, 10, $row['Articulo'], 0, 0, 'C', 1);
-		$fpdf -> Cell(30, 10, $row['Descripcion'], 0, 0, 'C', 1);
-		$fpdf -> Cell(30, 10, $row['TipoArticulo'], 0, 0, 'C', 1);
-		$fpdf -> Cell(30, 10, $row['TipoIncidencia'], 0, 0, 'C', 1);
-		$fpdf -> Cell(45, 10, $row['Observaciones'], 0, 0, 'C', 1);
-	}
-	$fpdf -> Output('I', 'Informe Sloan.pdf');
+	
 ?>
