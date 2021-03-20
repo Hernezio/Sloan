@@ -58,18 +58,22 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 		
 		<!-- ICONO Font Awesome -->
 		<script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
 		
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="sass/custom.css">
+		<link rel="stylesheet" href="css/custom.css">
 		
 		<title>Recuperar contraseña</title>
 		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 
-	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
+	<body class="text-dark" style="font-family: 'Noto Sans JP', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
 		<div class="container position-relative">
 			<div class="row mt-3 mt-lg-3 pt-lg-5">
 
@@ -98,7 +102,7 @@
 								<input type="text" <?php echo $inputCarnet; ?> name="numero_carnet" required>
 								<input type="password" <?php echo $nuevaClave; ?> name="contrasenia" onclick="funcion_javascript()" required>
 								<input type="password" <?php echo $nuevaClaveComparacion; ?> name="contraseniaC" title="Minimo 10 digitos" required>
-								<button class="btn btn-success text-white btn-lg pr-5 pl-5 mt-1 shadow" id="btnConfirmar" name="confirmar">Guardar</button>
+								<button class="btn btn-success text-white pr-5 pl-5 mt-1 shadow" id="btnConfirmar" name="confirmar">Guardar</button>
 							</form>
 						</div>
 					</div>

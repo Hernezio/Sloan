@@ -1,4 +1,4 @@
-// Confirma Eliminar
+// Alerta Confirma Eliminar
 function confirmarEliminar(){
     var respuesta = confirm("¿ Estás seguro que deseas eliminar este registro ?");
     if (respuesta == true){
@@ -22,7 +22,7 @@ function soloLetras(e){
         }
     }
     if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    	var $mensaje=alert("Solo se Permiten Letras");
+    	var $mensaje=alert("Solo se permitén letras");
         return false;
     }
 }
@@ -35,6 +35,9 @@ function validarNumero(e) {
     te = String.fromCharCode(tecla); 
     return patron.test(te); 
 }
+
+
+// SweetAlert2
 
 // Recoradatorio Contraseña
 function funcion_javascript() {

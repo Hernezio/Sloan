@@ -45,7 +45,7 @@
 
 							$_SESSION['carnetUsuario'] = $fila['numero_carnet'];
 
-							header('location: crudAdmin/homeAdmin.php');
+							header('location: admin/home.php');
 
 						} catch (PDOException $e) {
 							echo "error en el inicio de sesion".$e -> getMessage();
@@ -69,7 +69,7 @@
 
 							$_SESSION['carnetUsuario']=$fila['numero_carnet'];
 							
-							header('location: crudMonitor/homeMonitor.php');
+							header('location: monitor/home.php');
 
 						} catch (PDOException $e) {
 							echo "error en el inicio de sesion".$e -> getMessage();
@@ -97,18 +97,22 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
 		
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="sass/custom.css">
+		<link rel="stylesheet" href="css/custom.css">
 		
 		<title>Ingreso de usuarios SLOAN</title>
 		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 
-	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
+	<body class="text-dark" style="font-family: 'Noto Sans JP', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
 		
 		<!-- Targeta con formulario de acceso -->
 		<div class="container position-relative">
@@ -123,7 +127,7 @@
 							<form method="post" class="form-group">
 								<input name="nUsuario" <?php echo $claseUsuario; ?> type="text" <?php echo $inputUsuario; ?> required>
 								<input name="contraseña" <?php echo $claseContraseña; ?> type="password" <?php echo $inputClave; ?> required>
-								<button class="btn btn-success text-white btn-lg mt-3 pr-5 pl-5 mb-2 shadow" id="btnInicio" name="inicio">Ingresar</button>
+								<button class="btn btn-success text-white mt-3 pr-5 pl-5 mb-2 shadow" id="btnInicio" name="inicio">Ingresar</button>
 							</form>
 						</div>
 						<div class="card-footer pt-4 pb-3">
