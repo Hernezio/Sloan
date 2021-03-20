@@ -1,20 +1,23 @@
 <?php
+
 	include_once"../conexion.php";
+    include_once "../confirmarInicio.php";
+
 	$sentencia_select=$con->prepare('SELECT * FROM prestamos ORDER BY id_prestamo DESC');
 	$sentencia_select->execute();
 	$resultado=$sentencia_select->fetchAll();
-	// metodo buscar 
+	
+    // metodo buscar 
 	if(isset($_POST['btn_buscar'])){
 		$buscar_text=$_POST['buscar'];
 		$select_buscar=$con->prepare('SELECT * FROM prestamos WHERE id_prestamo LIKE :campo OR id_usuario LIKE :campo OR id_articulo LIKE :campo;');
 		$select_buscar->execute(array(':campo' =>"%".$buscar_text."%"));
 		$resultado=$select_buscar->fetchAll();
 	}
-    include_once "../confirmarInicio.php";
-
+    
     $confirmar = new Confirmar();
-
     if ($confirmar -> verificar() == true):
+
 ?>
 
 <!DOCTYPE html>
@@ -22,23 +25,29 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+        
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
-		<title>Préstamos Sloan</title>
+		
+        <title>Préstamos Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoS.png">
 	</head>
+    
     <body style="font-family: 'Lato', sans-serif;">
+       
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center p-2">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="homeMonitor.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
                             <h2 class="text-white h2 text-center d-inline">Monitor</h2>
                         </a>
@@ -59,16 +68,17 @@
                                 <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="prestamo.php">Préstamos</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../home2.php#Tut">Tutoriales</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="homeMonitor.php#Tut">Tutoriales</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../cerrarSession.php.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>  
+        
         <!-- CARRUSEL CON BOTON DE BUSQUEDA -->
         <div class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -90,8 +100,10 @@
                 </div>
             </div>
         </div>
+
 		<!-- Contenedor #2 -->
 		<div class="container">
+           
             <!-- TABLA -->
             <div class="row pt-5">
                 <div class="col-12">
@@ -178,21 +190,22 @@
                     </table>
                 </div>
             </div>
+
             <!-- OPCIONES -->
-            <?php
-        
-                include_once "contenido.plantilla.html"
-            ?>
+            <?php include_once "contenido.plantilla.html" ?>
+
 		</div>
+
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	</body>
 </html>
-<?php 
-    endif;
 
+<?php 
+
+    endif;
     if ($confirmar -> verificar() == false){
         header('location: ../index.php');
     }

@@ -1,10 +1,9 @@
 <?php 
 
-include_once "../confirmarInicio.php";
+    include_once "../confirmarInicio.php";
 
-$confirmar = new Confirmar();
-
-if ($confirmar -> verificar() == true):
+    $confirmar = new Confirmar();
+    if ($confirmar -> verificar() == true):
 
 ?>
 
@@ -13,17 +12,23 @@ if ($confirmar -> verificar() == true):
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+        
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
+        
         <title>Sloan</title>
         <link rel="shortcut icon" href="../img/LogoS.png">
     </head>
+    
     <body style="font-family: 'Lato', sans-serif;">
+       
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
@@ -42,20 +47,21 @@ if ($confirmar -> verificar() == true):
                         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
                             <ul class="navbar-nav text-center">
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudMonitor/devoluciones.php">Devoluciones</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudMonitor/prestamo.php">Préstamos</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudMonitor/inciencia.php">Incidencias</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudMonitor/inventario.php">Inventario</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="devoluciones.php">Devoluciones</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="prestamo.php">Préstamos</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="#Tut">Tutoriales</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="crudMonitor/usuarios.php">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../cerrarSession.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
-        </div>   
+        </div>  
+
         <!-- CARRUSEL CON BOTON DE BUSQUEDA -->
         <div class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -72,11 +78,13 @@ if ($confirmar -> verificar() == true):
                 </div>
             </div>
         </div>
+
         <!-- Contenedor #2 -->
-        <?php
-        
-            include_once "contenido.plantilla.html"
-        ?>
+        <div class="container-fluid">
+
+            <!-- CONTENIDO -->
+            <?php include_once "contenido.plantilla.html" ?>
+
             <!-- TITULO TUTORIALES -->
             <div class="row text-center" id="Tut">
                 <div class="col-lg-4 col-1"></div>
@@ -85,6 +93,7 @@ if ($confirmar -> verificar() == true):
                 </div>
                 <div class="col-lg-4 col-1"></div>
             </div>
+
             <!-- VIDEO TUTORIALES -->
             <div class="row bg-info pt-3">
                 <!-- Video #1 -->
@@ -142,16 +151,18 @@ if ($confirmar -> verificar() == true):
                     </a>
                 </div>     
             </div>
+
         </div>
+
         <!-- Scripts de Bootstrap -->
-        <script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     </body>
 </html>
 <?php 
+    
     endif;
-
     if ($confirmar -> verificar() == false){
         header('location: ../index.php');
     }

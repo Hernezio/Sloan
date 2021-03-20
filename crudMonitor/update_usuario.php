@@ -1,34 +1,38 @@
 <?php
+
 	include_once "../conexion.php";
+
 	if (isset($_GET['id_usuario'])){
 		$id_usuario=(int)$_GET['id_usuario'];
 		$buscar_registro=$con->prepare('SELECT * FROM usuarios WHERE id_usuario= :id_usuario');
 		$buscar_registro -> execute(array(':id_usuario'=>$id_usuario));
 		$resultado= $buscar_registro -> fetch();
-	}else {
+	} else {
 		header('location: usuarios.php');
 	}
+
 	if (isset($_POST['btn_guardar'])){
 		$nombre=$_POST['nombre'];
 		$apellido=$_POST['apellido'];
 		$numero_carnet=$_POST['numero_carnet'];
 		$id_usuario=(int)$_GET['id_usuario'];
+		
 		if (!empty ($id_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($id_usuario)){
-			$modificar_usuario= $con-> prepare ('UPDATE usuarios SET 
-				nombre=:nombre,
-				apellido=:apellido,
-				numero_carnet=:numero_carnet
-				WHERE id_usuario=:id_usuario');
+			$modificar_usuario= $con-> prepare('UPDATE usuarios SET nombre=:nombre, apellido=:apellido, numero_carnet=:numero_carnet WHERE id_usuario=:id_usuario');
 			$modificar_usuario-> execute(array( 
 				':id_usuario'=>$id_usuario, 
 				':nombre'=>$nombre, 
 				':apellido'=> $apellido,
-				':numero_carnet'=>$numero_carnet));
+				':numero_carnet'=>$numero_carnet
+			));
+
 			header('location: usuarios.php');
+			
 		} else {
 			echo '<script language="javascript">alert("Debes seleccionar tipo de usuario");</script>';
 		}
 	}	
+
 ?>
 
 <!DOCTYPE html>
@@ -36,23 +40,29 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
+		
 		<title>Préstamos Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoS.png">
 	</head>
+	
 	<body style="font-family: 'Lato', sans-serif; background: -webkit-radial-gradient(top left, white, #fff4eb, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
+		
 		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center p-2">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="homeMonitor.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
                             <h2 class="text-white h2 text-center d-inline">Monitor</h2>
                         </a>
@@ -73,16 +83,17 @@
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="prestamo.php">Préstamos</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../home2.php#Tut">Tutoriales</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="homeMonitor.php#Tut">Tutoriales</a></li>
                                 <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../cerrarSession.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div> 
+
         <!-- Contenedor #2 -->
 		<div class="container">
 			<div class="row pt-3">
@@ -161,6 +172,7 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
+
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>

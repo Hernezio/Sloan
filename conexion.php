@@ -1,4 +1,5 @@
 <?php
+
    $database	="proyectosloan";
    $usuario		="root";
    $password	="";
@@ -11,4 +12,5 @@
    } catch (PDOexception $e) {
       echo "Conexion Erronea".$e -> getMessage ();
    }
+   
 ?>

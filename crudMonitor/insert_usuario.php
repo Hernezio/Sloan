@@ -1,27 +1,34 @@
 <?php
+	
 	include_once "../conexion.php";
+
 	if (isset($_POST['btn_guardar'])){
+		
 		if($_POST['tipo_usuario'] == 3 || $_POST['tipo_usuario'] == 4){
 			$tipo_usuario=$_POST['tipo_usuario'];
 			$nombre=$_POST['nombre'];
 			$apellido=$_POST['apellido'];
 			$numero_carnet=$_POST['numero_carnet'];
 			$estado_usuario=$_POST['estado_usuario'];
+			
 			if (!empty ($tipo_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($estado_usuario)){
 				$insert_usuario= $con-> prepare ('INSERT INTO usuarios(tipo_usuario,nombre,apellido,numero_carnet,estado_usuario) VALUES (:tipo_usuario,:nombre,:apellido,:numero_carnet,:estado_usuario)');
 				$insert_usuario-> execute(array(			
-				':tipo_usuario'=>$tipo_usuario,
-				':nombre'=>$nombre,
-				':apellido'=>$apellido,
-				':numero_carnet'=>$numero_carnet,
-				':estado_usuario'=>$estado_usuario
-			));
-			header('location: usuarios.php');
+					':tipo_usuario'=>$tipo_usuario,
+					':nombre'=>$nombre,
+					':apellido'=>$apellido,
+					':numero_carnet'=>$numero_carnet,
+					':estado_usuario'=>$estado_usuario
+				));
+
+				header('location: usuarios.php');
+
 			} else {
-				echo '<script language="javascript">alert("Debes seleccionar tipo de usuario");</script>';
+				echo '<script language="javascript">alert("No estas autorizado para agregar este tipo de usuario");</script>';
 			}
+
 		} else {
-			echo '<script language="javascript">alert("No estas autorizado para agregar este tipo de usuario");</script>';
+			echo '<script language="javascript">alert("Debes seleccionar tipo de usuario");</script>';
 		}
 	}
 ?>
@@ -31,23 +38,29 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
+		
 		<title>Préstamos Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoS.png">
 	</head>
+	
 	<body style="font-family: 'Lato', sans-serif; background: -webkit-radial-gradient(top left, white, #fff4eb, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
+		
 		<!-- Contenedor #1 NAVBAR -->
 		<div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center p-2">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="homeMonitor.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
                             <h2 class="text-white h2 text-center d-inline">Monitor</h2>
                         </a>
@@ -68,16 +81,17 @@
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="prestamo.php">Préstamos</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inciencia.php">Incidencias</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../home2.php#Tut">Tutoriales</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="homeMonitor.php#Tut">Tutoriales</a></li>
                                 <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../cerrarSession.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div> 
+        
         <!-- Contenedor #2 -->
 		<div class="container mt-5">
 			<div class="row pt-3">
@@ -130,10 +144,6 @@
 									<label for="inputState" class="form-label h5 p-2">Apellido:</label>
 									<input class="form-control" type="text" name="apellido" placeholder="Digite Apellido" onkeypress="return soloLetras(event)" required>
 								</div>
-								<!-- <div class="col-md-4 d-none">
-									<label for="inputState" class="form-label h5 p-2">Contraseña:</label>
-									<input class="form-control" type="password" name="contrasenia" placeholder="Digite Contraseña" onclick="funcion_javascript()" required>
-								</div>	 -->
 								<div class="col-12 text-center">
 									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white btn-lg mb-3 mt-2 shadow">
 								</div>
@@ -156,6 +166,7 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
+
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>

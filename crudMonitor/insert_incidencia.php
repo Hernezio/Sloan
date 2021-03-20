@@ -1,10 +1,14 @@
 <?php
+	
 	include_once "../conexion.php";
+
 	if (isset($_POST['btn_guardar'])){
+
 		//no se coloca el campo primario
 		$id_det_devolucion=$_POST['id_det_devolucion'];
 		$tipo_incidencia=$_POST['tipo_incidencia'];
 		$observaciones=$_POST['observaciones'];
+		
 		if (!empty ($id_det_devolucion) && !empty ($tipo_incidencia) && !empty($observaciones)){
 			$insert_devolucion= $con-> prepare ('INSERT INTO incidencias(id_det_devolucion, tipo_incidencia, observaciones) VALUES (:id_det_devolucion, :tipo_incidencia, :observaciones)');
 			$insert_devolucion-> execute(array(
@@ -12,8 +16,10 @@
 				':tipo_incidencia'=>$tipo_incidencia,
 				':observaciones'=>$observaciones
 			));
-		header('location: inciencia.php');
-		}else {
+
+			header('location: inciencia.php');
+
+		} else {
 			echo '<script language="javascript">alert("Debe seleccionar detalle de devolución y el tipo de incidencia");</script>';
 		}
 	}
@@ -24,23 +30,29 @@
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
         <!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap" rel="stylesheet">
+        
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+		
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../sass/custom.css">
+		
 		<title>Préstamos Sloan</title>
 		<link rel="shortcut icon" href="../img/LogoS.png">
 	</head>
+	
 	<body style="font-family: 'Lato', sans-serif; background: -webkit-radial-gradient(top left, white, #fff4eb, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
+        
         <!-- Contenedor #1 NAVBAR -->
         <div class="container-fluid">
             <div class="row bg-warning">
                 <div class="col-12">
                     <nav class="navbar navbar-dark align-items-center p-2">
-                        <a class="navbar-brand" href="../home2.php">
+                        <a class="navbar-brand" href="homeMonitor.php">
                             <span><i class="fas fa-home fa-2x"></i></span>
                             <h2 class="text-white h2 text-center d-inline">Monitor</h2>
                         </a>
@@ -61,16 +73,17 @@
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="prestamo.php">Préstamos</a></li>
                                 <li class="nav-item"><a class="nav-link text-success h5 fw-bold disabled" href="inciencia.php">Incidencias</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="inventario.php">Inventario</a></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../home2.php#Tut">Tutoriales</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="homeMonitor.php#Tut">Tutoriales</a></li>
                                 <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="usuarios.php">Usuarios</a></li>
                                 <li><div class="dropdown-divider"></div></li>
-                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../index.php">Salir</a></li>
+                                <li class="nav-item"><a class="nav-link text-white h5 fw-bold" href="../cerrarSession.php">Salir</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>      
+        
         <!-- Contenedor #2 -->
 		<div class="container mt-5">
 			<div class="row pt-3">
@@ -131,6 +144,7 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
+
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="../js/popper.min.js"></script>

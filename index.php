@@ -1,6 +1,8 @@
 <?php  
+
 	// Conexión
 	include_once"conexion.php";
+
 	// Variables
 	$claseUsuario = "class = \"form-control mt-3 mb-4 pr-3 pl-3\"";
 	$claseContraseña = "class = \"form-control mb-3 pr-3 pl-3\"";
@@ -9,6 +11,7 @@
 	$sentencia_select = $con->prepare('SELECT * FROM usuarios ORDER BY id_usuario ASC');
 	$sentencia_select->execute();
 	$resultado = $sentencia_select->fetchAll();
+
 	// Ciclos donde se verifican los datos
 	if(isset($_POST['inicio'])) {
 		$buscar_text = $_POST['nUsuario'];
@@ -16,14 +19,21 @@
 		$select_buscar->execute(array(':campo' =>"%".$buscar_text."%"));
 		$resultado = $select_buscar->fetchAll();
 		$arrayVacio = 0;
+
 		foreach ($resultado as $fila) {
+
 			$arrayVacio++;
+			
 			if ($fila['numero_carnet'] == $_POST['nUsuario']) {
+				
 				if ($fila['contrasenia'] == $_POST['contraseña']) {
+					
 					if ($fila['tipo_usuario'] == 1) {
+						
 						$sesion = "activo";
 						
 						try {
+
 							$stmt = $con -> prepare('call inicioSesion(?,?)');
 							$stmt -> bindParam(1, $sesion, PDO::PARAM_STR);
 							$stmt -> bindParam(2, $fila['numero_carnet'], PDO::PARAM_STR);
@@ -32,27 +42,31 @@
 
 							session_start();
 							ob_start();
+
 							$_SESSION['carnetUsuario'] = $fila['numero_carnet'];
 
 							header('location: crudAdmin/homeAdmin.php');
-
 
 						} catch (PDOException $e) {
 							echo "error en el inicio de sesion".$e -> getMessage();
 						}
 					}
+
 					if ($fila['tipo_usuario'] == 2) {
+
 						$sesion = "activo";
+
 						try {
+
 							$stmt = $con -> prepare('call inicioSesion(?,?)');
 							$stmt -> bindParam(1, $sesion, PDO::PARAM_STR);
 							$stmt -> bindParam(2, $fila['numero_carnet'], PDO::PARAM_STR);
-							
 
 							$stmt -> execute();
 
 							session_start();
 							ob_start();
+
 							$_SESSION['carnetUsuario']=$fila['numero_carnet'];
 							
 							header('location: crudMonitor/homeMonitor.php');
@@ -61,6 +75,7 @@
 							echo "error en el inicio de sesion".$e -> getMessage();
 						}
 					}
+
 				} else {
 					echo '<script language="javascript">alert("La contraseña es incorrecta");</script>';			
 					$inputClave= "placeholder = \"Contraseña incorrecta\"";
@@ -68,6 +83,7 @@
 				}
 			}
 		}
+
 		if ($arrayVacio <= 0) {
 			echo '<script language="javascript">alert("No se encontro este usuario");</script>';			
 			$inputUsuario= "placeholder = \"Usuario no existe\"";
@@ -81,14 +97,19 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+       
         <!-- ICONO Font Awesome -->
         <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
+		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="sass/custom.css">
+		
 		<title>Ingreso de usuarios SLOAN</title>
 		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
+
 	<body class="text-dark" style="font-family: 'Lato', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
+		
 		<!-- Targeta con formulario de acceso -->
 		<div class="container position-relative">
 			<div class="row mt-4 mt-lg-4 pt-lg-5">
@@ -113,6 +134,7 @@
 				<div class="col-4"></div>
 			</div>
 		</div>
+		
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
 		<script type="text/javascript" src="js/popper.min.js"></script>
