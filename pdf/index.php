@@ -2,7 +2,7 @@
 	
 	require ('fpdf/fpdf.php');	
 		
-	class IncidenciaPdf {
+	class IncidenciaPdf extends FPDF {
 
 		private $idIncidencia;
 
@@ -47,64 +47,89 @@
 				$datosUsuarioDevoluciones = $stmt -> fetch();
 
 				$pdf = new FPDF();
-				$pdf -> Addpage();
+				$pdf -> AddPage('potrait', 'Letter');
 
-				//Header
-				// Logo
-				$pdf -> Image('../img/logoSloan.png',82,3,40);
-				$pdf->	SetTextColor(240, 103, 12);
-				
-				// Arial bold 15
-				$pdf -> SetFont('Arial','B',14);
-				
-				// Movernos a la derecha
-				$pdf -> Cell(80);
-				
-				// Título
-				$pdf -> Write(59,'Incidencia');
-				
-				// Salto de línea
-				$pdf -> Ln(90);
-
-				//Body							
-				//Creamos las celdas para los titulo de cada columna y le asignamos un fondo gris y el tipo de letra
-				$pdf->	SetTextColor(0, 0, 0);
-				$pdf->	SetFillColor(232,232,232);
-				$pdf->	SetFont('Arial','B',10);
-				$pdf-> 	Cell(2);				
-				$pdf->	Cell(92,6,'Id incidencia: '.utf8_decode($incidenciaTable['id_incidencia']),1,0,'L',60);	
-				$pdf->	Cell(92,6,'Tipo incidenacidencia: '.utf8_decode($tipo),1,0,'L',60);					
-				$pdf -> Ln(6);
-
-				$pdf->	SetFillColor(255, 255, 255);
-				$pdf->	SetFont('Arial','B',10);
-				$pdf-> 	Cell(2);				
-				$pdf->	Cell(184,6,'Observaciones: '.utf8_decode($incidenciaTable['observaciones']),1,0,'L',60);
-				$pdf -> Ln(6);
-	
-				$pdf->	SetFillColor(232,232,232);
-				$pdf->	SetFont('Arial','B',10);
-				$pdf-> 	Cell(2);				
-				$pdf->	Cell(92,6,'Nombre Aprendiz: '.utf8_decode($datosUsuarioDevoluciones['nombre']),1,0,'L',60);	
-				$pdf->	Cell(92,6,'Apellido Aprendiz: '.utf8_decode($datosUsuarioDevoluciones['apellido']),1,0,'L',60);	
-				$pdf -> Ln(6);
-				
-				$pdf->	SetFillColor(255, 255, 255);
-				$pdf->	SetFont('Arial','B',10);
-				$pdf-> 	Cell(2);				
-				$pdf->	Cell(92,6,'Nombe Articulo: '. utf8_decode($datosUsuarioDevoluciones['nombre_articulo']),1,0,'L',60);
-				$pdf->	Cell(92,6,'Id Articulo: '. utf8_decode($datosUsuarioDevoluciones['codigo_barras']),1,0,'L',60);
+				//Header		
+				$pdf -> SetFont('Arial', 'B', 14);
+				$pdf -> Cell(0, 7, 'Informe de Incidencia', 0, 0, 'C');
+				$pdf -> Ln();
+				$pdf -> SetFont('Arial', 'B', 10);
+				$pdf -> Cell(0, 6, utf8_decode('Centro de Diseño y Manufactura del Cuero'), 0, 0, 'C');
+				$pdf -> Image('../img/LogoSloan.png', 175, 5, 30, 20, 'png');
 				$pdf -> Ln(20);
 
-				$pdf->	SetFont('Arial','',10);				
-				$pdf -> Write(16,utf8_decode('Mediante la siguiente se informa que el estudiante '.$datosUsuarioDevoluciones['nombre'].' '.$datosUsuarioDevoluciones['apellido'].' con numero de carnet '.$datosUsuarioDevoluciones['numero_carnet']));
+				//Body	
+				$pdf -> SetX(40);
+				$pdf ->	SetFont('Arial','',10);				
+				$pdf -> Write(16, utf8_decode('Mediante la presente se informa que el estudiante ' . $datosUsuarioDevoluciones['nombre'] . ' ' . $datosUsuarioDevoluciones['apellido'] . ','));
+				$pdf -> Ln(5);
+				$pdf -> SetX(40);
+
+				$pdf -> Write(16, utf8_decode('con numero de carnet ' . $datosUsuarioDevoluciones['numero_carnet'] . ' ha sido reportado con una incidencia de tipo ' . $tipo . '.'));
 				$pdf -> Ln(8);
-				$pdf -> Write(9,utf8_decode(' tubo una incidencia de tipo '.$tipo.' en la fecha '.$detalleDevTable['fecha_devolucion'].' con el dispositivo '.$datosUsuarioDevoluciones['nombre_articulo']. ' se informa a todos los encargados para tomar las medidas respectivas.'));
+				$pdf -> SetX(40);
+
+				$pdf -> Write(16, utf8_decode('El artículo audiovisual relacionado con la incidencia es: ' . $datosUsuarioDevoluciones['nombre_articulo'] . ' y la'));
+				$pdf -> Ln(5);
+				$pdf -> SetX(40);
+
+				$pdf -> Write(16, utf8_decode('fecha en la que ocurrio la incidencia fue ' . $detalleDevTable['fecha_devolucion'] . '.'));
+				$pdf -> Ln(8);
+				$pdf -> SetX(40);
+
+				$pdf -> Write(16, utf8_decode('Todos los encargados e interesados en el tema, porfavor tomar lo mas pronto '));
+				$pdf -> Ln(5);
+				$pdf -> SetX(40);
+
+				$pdf -> Write(16, utf8_decode('posible las respectivas medidas en este caso.'));
+				$pdf -> Ln(5);
+				$pdf -> SetX(40);
+
+				$pdf -> Ln(20);
+
+				$pdf -> SetFont('Arial', 'B', 10);
+				$pdf -> Cell(0, 6, utf8_decode('Detalles'), 0, 0, 'C');
+
+				//Creamos las celdas para los titulo de cada columna y le asignamos un fondo gris y el tipo de letra
+				$pdf -> Ln(10);
+				$pdf ->	SetFillColor(255, 246, 237);
+				$pdf -> SetX(20);
+				$pdf -> Cell(2);				
+				$pdf ->	SetFont('Arial', 'B', 10);
+				$pdf ->	Cell(85, 6, 'Id incidencia: ' . utf8_decode($incidenciaTable['id_incidencia']), 1, 0, 'L', 60);	
+				$pdf ->	Cell(85, 6, 'Tipo incidenacidencia: ' . utf8_decode($tipo), 1, 0, 'L', 60);					
+				$pdf -> Ln(6);
+
+				$pdf ->	SetFillColor(255, 255, 255);
+				$pdf ->	SetFont('Arial', '', 11);
+				$pdf -> SetX(20);
+				$pdf -> Cell(2);
+				$pdf ->	MultiCell(170, 6, 'Observaciones: ' . utf8_decode($incidenciaTable['observaciones']),1 ,1, 'C', 20);
+	
+				$pdf ->	SetFillColor(255, 246, 237);
+				$pdf ->	SetFont('Arial', 'B', 10);
+				$pdf -> SetX(20);
+				$pdf -> Cell(2);				
+				$pdf ->	Cell(85, 6, 'Nombre Aprendiz: ' . utf8_decode($datosUsuarioDevoluciones['nombre']), 1 ,0, 'L',6 0);	
+				$pdf ->	Cell(85, 6, 'Apellido Aprendiz: ' . utf8_decode($datosUsuarioDevoluciones['apellido']), 1, 0, 'L', 60);	
+				$pdf -> Ln(6);
+				
+				$pdf ->	SetFillColor(255, 246, 237);
+				$pdf ->	SetFont('Arial', 'B', 10);
+				$pdf -> SetX(20);
+				$pdf ->	Cell(2);				
+				$pdf ->	Cell(85, 6, 'Nombe Articulo: ' . utf8_decode($datosUsuarioDevoluciones['nombre_articulo']), 1, 0, 'L', 60);
+				$pdf ->	Cell(85, 6, 'Id Articulo: ' . utf8_decode($datosUsuarioDevoluciones['codigo_barras']), 1, 0, 'L', 60);
+				$pdf -> Ln(100);
+				$pdf -> Ln(15);
+
+				$pdf -> AliasNbPages();
+				$pdf -> Cell(0,10, 'Pagina '.$pdf->PageNo() . '/{nb}', 0, 0, 'C');
 
 				$pdf -> Output('I', 'Informe Sloan.pdf');
 
 			} catch (PDOException $e) {
-				echo "error en el pdf". $e -> getMessage();
+				echo "error en el pdf" . $e -> getMessage();
 			}
 		}
 
