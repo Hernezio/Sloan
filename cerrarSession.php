@@ -4,4 +4,6 @@
     $cerrar = new Confirmar();
     $cerrar  -> cerrarSesion();
 
+    session_destroy();
+
 ?>

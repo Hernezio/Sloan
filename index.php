@@ -107,37 +107,42 @@
 		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/login.css">
 		
 		<title>Ingreso de usuarios SLOAN</title>
 		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 
-	<body class="text-dark" style="font-family: 'Noto Sans JP', sans-serif; background-image: url(img/F6.jpg); background-size:cover; height: 100%; background-attachment: fixed;">
-		
-		<!-- Targeta con formulario de acceso -->
-		<div class="container position-relative">
-			<div class="row mt-4 mt-lg-4 pt-lg-5">
-				<div class="col-4"></div>
-				<div class="col-4 mt-5 mt-lg-5">
-					<div class="card text-center shadow-lg p-3 mb-5 rounded">
-						<div class="card-header">
-							<img width="200" src="img/LogoSloan.png" class="img-fluid" alt="logo">
+	<body style="font-family: 'Noto Sans JP', sans-serif;">
+		<main>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6 login-section-wrapper">
+						<div class="align-items-center text-center align-content-center">
+							<img src="img/LogoSloan.png" alt="logo" width="150" class="logo img-fluid">
 						</div>
-						<div class="card-body">
-							<form method="post" class="form-group">
-								<input name="nUsuario" <?php echo $claseUsuario; ?> type="text" <?php echo $inputUsuario; ?> required>
-								<input name="contraseña" <?php echo $claseContraseña; ?> type="password" <?php echo $inputClave; ?> required>
-								<button class="btn btn-success text-white mt-3 pr-5 pl-5 mb-2 shadow" id="btnInicio" name="inicio">Ingresar</button>
+						<div class="login-wrapper my-auto">
+							<h1 class="login-title text-success">Ingreso Sloan</h1>
+							<form method="post">
+								<div class="form-group">
+									<label class="text-dark fw-bold">Usuario</label>
+									<input type="text" name="nUsuario" <?php echo $claseUsuario; ?> id="nUsuario" class="form-control" <?php echo $inputUsuario; ?> required>
+								</div>
+								<div class="form-group mb-5">
+									<label class="mb-3 text-dark fw-bold">Contraseña</label>
+									<input type="password" name="contraseña" <?php echo $claseContraseña; ?> id="contraseña" class="form-control" <?php echo $inputClave; ?> requiered>
+								</div>
+								<button class="btn btn-block bg-warning login-btn" id="btnInicio" name="inicio">Ingresar</button>
 							</form>
-						</div>
-						<div class="card-footer pt-4 pb-3">
-							<a href="restaurarPassword.php" class="h6 text-info text-decoration-none">¿Olvidó su contraseña?</a>				
+							<a href="restaurarPassword.php" class="forgot-password-link">¿Se le olvidó su contraseña?</a>
 						</div>
 					</div>
+					<div class="col-sm-6 px-0 d-none d-sm-block">
+						<img src="img/persona.jpg" alt="login image" class="login-img img-fluid">
+					</div>
 				</div>
-				<div class="col-4"></div>
 			</div>
-		</div>
+		</main>
 		
 		<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2021 at 09:31 PM
+-- Generation Time: Mar 21, 2021 at 07:00 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.39
 
@@ -26,67 +26,74 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarDetDevolucion` (IN `id` INT(10))  NO SQL
+CREATE   PROCEDURE `buscarDetDevolucion` (IN `id` INT(10))  NO SQL
 SELECT * FROM det_devolucion WHERE det_devolucion.id_det_devolucion = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarDevolucion` (IN `id_devolucion` INT(100))  NO SQL
+CREATE   PROCEDURE `buscarDevolucion` (IN `id_devolucion` INT(100))  NO SQL
 SELECT * FROM devoluciones WHERE devoluciones.id_devolucion = id_devolucion$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarIncidencia` (IN `id` INT(100))  NO SQL
+CREATE   PROCEDURE `buscarIncidencia` (IN `id` INT(100))  NO SQL
 SELECT * FROM incidencias WHERE incidencias.id_incidencia = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `carnet_id` (IN `carnet` INT(100))  NO SQL
+CREATE   PROCEDURE `carnet_id` (IN `carnet` INT(100))  NO SQL
 SELECT * FROM usuarios WHERE usuarios.numero_carnet = carnet$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `codigo_barras` (IN `codigo` INT(100))  NO SQL
+CREATE   PROCEDURE `codigo_barras` (IN `codigo` INT(100))  NO SQL
 SELECT * FROM articulos WHERE articulos.codigo_barras = codigo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `confirmarInicioSesion` (IN `id` INT(10))  NO SQL
+CREATE   PROCEDURE `confirmarInicioSesion` (IN `id` INT(10))  NO SQL
 SELECT usuarios.sesion FROM usuarios WHERE usuarios.numero_carnet = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `confirmar_dev` (IN `idU` INT(100), IN `idArt` INT(100))  NO SQL
+CREATE   PROCEDURE `confirmar_dev` (IN `idU` INT(100), IN `idArt` INT(100))  NO SQL
 SELECT * FROM prestamos WHERE id_usuario = idU AND id_articulo = idArt ORDER BY id_prestamo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `detalle_prestamo` (IN `ide_prest` INT(100))  NO SQL
+CREATE   PROCEDURE `detalle_prestamo` (IN `ide_prest` INT(100))  NO SQL
 INSERT INTO `det_prestamo` (`id_det_prestamo`, `id_prestamo`, `fecha_prestamo`, `hora_prestamo`) VALUES (NULL, ide_prest, NOW(), NOW())$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `det_devolucion` (IN `ide_dev` INT(100))  NO SQL
+CREATE   PROCEDURE `det_devolucion` (IN `ide_dev` INT(100))  NO SQL
 INSERT INTO `det_devolucion` (`id_det_devolucion`, `id_devolucion`, `fecha_devolucion`, `hora_devolucion`) VALUES (NULL, ide_dev, NOW(), NOW())$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `devolucion` (IN `idUser` INT(100), IN `idArt` INT(100))  NO SQL
+CREATE   PROCEDURE `devolucion` (IN `idUser` INT(100), IN `idArt` INT(100))  NO SQL
 INSERT INTO `devoluciones` (`id_devolucion`, `id_usuario`, `id_articulo`) VALUES (NULL, idUser, idArt)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `D_nombre` (IN `id` INT(100), IN `idA` INT(100))  NO SQL
-SELECT usuarios.nombre , usuarios.apellido, usuarios.numero_carnet, articulos.nombre_articulo, articulos.codigo_barras FROM usuarios, articulos  WHERE usuarios.id_usuario = id AND articulos.id_articulo = idA$$
+CREATE   PROCEDURE `D_nombre` (IN `id` INT(100), IN `idA` INT(100))  NO SQL
+SELECT 
+	usuarios.nombre , 
+	usuarios.apellido, 
+    usuarios.numero_carnet, 
+    articulos.nombre_articulo, 
+    articulos.codigo_barras 
+FROM usuarios, articulos 
+WHERE usuarios.id_usuario = id AND articulos.id_articulo = idA$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `estado_prestamo` (IN `est` INT(100), IN `id_art` INT(100))  NO SQL
+CREATE   PROCEDURE `estado_prestamo` (IN `est` INT(100), IN `id_art` INT(100))  NO SQL
 UPDATE `articulos` SET `disponibilidad` = est WHERE `articulos`.`id_articulo` = id_art$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `estado_usuario` (IN `estado` INT(100), IN `idU` INT(100))  NO SQL
+CREATE   PROCEDURE `estado_usuario` (IN `estado` INT(100), IN `idU` INT(100))  NO SQL
 UPDATE `usuarios` SET `estado_usuario` = estado WHERE `usuarios`.`id_usuario` = idU$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `inicioSesion` (IN `sesion` VARCHAR(10), IN `id` VARCHAR(10))  NO SQL
+CREATE   PROCEDURE `inicioSesion` (IN `sesion` VARCHAR(10), IN `id` VARCHAR(10))  NO SQL
 UPDATE usuarios SET usuarios.sesion = sesion WHERE usuarios.numero_carnet = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prestamos` (IN `idUser` INT(100), IN `idArt` INT(100))  NO SQL
+CREATE   PROCEDURE `prestamos` (IN `idUser` INT(100), IN `idArt` INT(100))  NO SQL
 INSERT INTO `prestamos` (`id_prestamo`, `id_usuario`, `id_articulo`) VALUES (NULL, idUser, idArt)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_nombre` (IN `id` INT(100), IN `ida` INT)  NO SQL
+CREATE   PROCEDURE `p_nombre` (IN `id` INT(100), IN `ida` INT)  NO SQL
 SELECT usuarios.nombre , usuarios.apellido, usuarios.numero_carnet, articulos.nombre_articulo, articulos.codigo_barras FROM usuarios, articulos  WHERE usuarios.id_usuario = id AND articulos.id_articulo = idA$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `selectIncidencias` ()  NO SQL
+CREATE   PROCEDURE `selectIncidencias` ()  NO SQL
 SELECT * FROM incidencias ORDER BY incidencias.id_incidencia DESC$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `select_detdev` (IN `id` INT(100))  NO SQL
+CREATE   PROCEDURE `select_detdev` (IN `id` INT(100))  NO SQL
 SELECT * FROM det_devolucion  WHERE det_devolucion.id_devolucion = id ORDER BY id_devolucion ASC$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `select_detprest` (IN `id` INT(100))  NO SQL
+CREATE   PROCEDURE `select_detprest` (IN `id` INT(100))  NO SQL
 SELECT * FROM det_prestamo  WHERE det_prestamo.id_prestamo = id ORDER BY id_prestamo ASC$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `select_perfiles` (IN `tip_user` INT(100))  NO SQL
+CREATE   PROCEDURE `select_perfiles` (IN `tip_user` INT(100))  NO SQL
 SELECT * FROM perfiles WHERE perfiles.id_perfil = tip_user$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spGenerarInforme` (IN `_id_incidencia` INT(11))  NO SQL
+CREATE   PROCEDURE `spGenerarInforme` (IN `_id_incidencia` INT(11))  NO SQL
 SELECT * FROM incidencias WHERE incidencias.id_incidencia = _id_incidencia$$
 
 DELIMITER ;
@@ -106,6 +113,15 @@ CREATE TABLE `articulos` (
   `disponibilidad` int(11) NOT NULL DEFAULT '1',
   `estado` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `articulos`
+--
+
+INSERT INTO `articulos` (`id_articulo`, `categoria`, `nombre_articulo`, `descripcion`, `codigo_barras`, `disponibilidad`, `estado`) VALUES
+(1, 1, 'Portatil Prueba', 'ENIAC', '1003', 1, 1),
+(2, 2, 'Video Bean Prueba', 'Upson', '1004', 1, 1),
+(3, 3, 'Cable HDMI Prueba', 'Infinito 5000', '1005', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +156,13 @@ CREATE TABLE `det_devolucion` (
   `hora_devolucion` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `det_devolucion`
+--
+
+INSERT INTO `det_devolucion` (`id_det_devolucion`, `id_devolucion`, `fecha_devolucion`, `hora_devolucion`) VALUES
+(1, 1, '2021-03-20', '17:14:56');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +176,13 @@ CREATE TABLE `det_prestamo` (
   `hora_prestamo` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `det_prestamo`
+--
+
+INSERT INTO `det_prestamo` (`id_det_prestamo`, `id_prestamo`, `fecha_Prestamo`, `hora_prestamo`) VALUES
+(1, 1, '2021-03-20', '17:13:17');
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +194,13 @@ CREATE TABLE `devoluciones` (
   `id_usuario` int(11) NOT NULL,
   `id_articulo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `devoluciones`
+--
+
+INSERT INTO `devoluciones` (`id_devolucion`, `id_usuario`, `id_articulo`) VALUES
+(1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -216,6 +253,13 @@ CREATE TABLE `incidencias` (
   `observaciones` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `incidencias`
+--
+
+INSERT INTO `incidencias` (`id_incidencia`, `id_det_devolucion`, `tipo_incidencia`, `observaciones`) VALUES
+(1, 1, 1, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable');
+
 -- --------------------------------------------------------
 
 --
@@ -250,6 +294,13 @@ CREATE TABLE `prestamos` (
   `id_articulo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `prestamos`
+--
+
+INSERT INTO `prestamos` (`id_prestamo`, `id_usuario`, `id_articulo`) VALUES
+(1, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -266,6 +317,16 @@ CREATE TABLE `usuarios` (
   `contrasenia` varchar(10) DEFAULT NULL,
   `sesion` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `tipo_usuario`, `nombre`, `apellido`, `numero_carnet`, `estado_usuario`, `contrasenia`, `sesion`) VALUES
+(1, 1, 'Juan Arnulfo', 'Mendoza Buitrago', 1001, 1, '1234', 'inactivo'),
+(2, 2, 'Leon Julian', 'Martinez Batistuta', 1002, 1, '$2y$10$lW1', 'inactivo'),
+(3, 3, 'Ruben Emilio', 'Galeano Diaz', 1003, 1, NULL, ''),
+(4, 4, 'Luis Alfonso', 'Becerra Laureles', 1004, 1, NULL, '');
 
 --
 -- Indexes for dumped tables
@@ -361,25 +422,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `det_devolucion`
 --
 ALTER TABLE `det_devolucion`
-  MODIFY `id_det_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id_det_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `det_prestamo`
 --
 ALTER TABLE `det_prestamo`
-  MODIFY `id_det_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_det_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `devoluciones`
 --
 ALTER TABLE `devoluciones`
-  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `estados`
@@ -391,7 +452,7 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT for table `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id_incidencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_incidencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `perfiles`
@@ -403,13 +464,13 @@ ALTER TABLE `perfiles`
 -- AUTO_INCREMENT for table `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_prestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

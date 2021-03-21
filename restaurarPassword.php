@@ -68,50 +68,45 @@
 		
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/login.css">
 		
 		<title>Recuperar contraseña</title>
 		<link rel="shortcut icon" href="img/LogoS.png">
 	</head>
 
-	<body class="text-dark" style="font-family: 'Noto Sans JP', sans-serif; background-image: url(img/F4.jpg); background-size: cover; height: 100%; background-attachment: fixed;">
-		<div class="container position-relative">
-			<div class="row mt-3 mt-lg-3 pt-lg-5">
-
-				<!-- Icono Atras -->
-				<div class="col-4 embed-responsive-item">
-					<div class="row mt-5 pt-5 mr-1 text-center align-items-center justify-content-center">
-						<div class="col-7"></div>
-						<div class="col-3">
-							<a href="index.php" class="rounded-circle p-2 bg-success border border-3 border-white text-decoration-none mt-2 shadow">
-								<i class="fas fa-chevron-left fa-lg text-white" title="Atras"></i>
-							</a>
-						</div>
-						<div class="col-2"></div>
+	<body class="text-dark" style="font-family: 'Noto Sans JP', sans-serif;">
+		<main>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6 px-0 d-none d-sm-block">
+						<img src="img/man.jpg" alt="login image" class="login-img img-fluid">
 					</div>
-				</div>
-
-				<!-- Targeta de recuperacion -->
-				<div class="col-4">
-					<div class="card bg-light text-center shadow-lg p-3 bg-white rounded">
-						<div class="card-header">
-							<h2 class="h2 pt-2">Recuperar contraseña</h2>
-							<img width="200" src="img/LogoCandado.png" class="img-fluid mt-2 mb-2" alt="candado">
+					<div class="col-sm-6 login-section-wrapper">
+						<div class="align-items-center text-center align-content-center">
+							<img src="img/LogoCandado.png" alt="logo" width="150" class="logo img-fluid">
 						</div>
-						<div class="card-body">
-							<form method="post" class="form-group">
-								<input type="text" <?php echo $inputCarnet; ?> name="numero_carnet" required>
-								<input type="password" <?php echo $nuevaClave; ?> name="contrasenia" onclick="funcion_javascript()" required>
-								<input type="password" <?php echo $nuevaClaveComparacion; ?> name="contraseniaC" title="Minimo 10 digitos" required>
-								<button class="btn btn-success text-white pr-5 pl-5 mt-1 shadow" id="btnConfirmar" name="confirmar">Guardar</button>
+						<div class="login-wrapper my-auto">
+							<h1 class="h3 fw-bold text-success">Recuperar contraseña</h1>
+							<form method="post">
+								<div class="form-group mt-5">
+									<label class="text-dark">Identificación</label>
+									<input type="text" class="form-control" <?php echo $inputCarnet; ?> name="numero_carnet" required>
+								</div>
+								<div class="form-group mb-1 mt-2">
+									<label class="mb-2 text-dark">Nueva contraseña</label>
+									<input type="password" class="form-control" <?php echo $nuevaClave; ?> name="contrasenia" onclick="funcion_javascript()" required>
+								</div>
+								<div class="form-group mb-5">
+									<input type="password" class="form-control" <?php echo $nuevaClaveComparacion; ?> name="contraseniaC" title="Minimo 10 digitos" required>
+								</div>
+								<a href="index.php" class="mb-5 m-1 btn btn-block bg-warning login-btn">Atras</a>
+								<button class="mb-5 m-1 btn btn-block bg-success login-btn" id="btnConfirmar" name="confirmar">Guardar</button>
 							</form>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-4"></div>
-				
 			</div>
-		</div>
+		</main>
 
 	 	<!-- Scripts de Bootstrap -->
 		<script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
@@ -119,6 +114,5 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="sweetAlert2/sweetalert2.all.min.js"></script>
 		<script type="text/javascript" src="js/alertas.js"></script>
-
 	</body>
 </html>

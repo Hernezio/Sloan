@@ -3,8 +3,12 @@
     <div class="carousel-inner">
 
         <!-- Imagenes del carrusel -->
+        <div class="carousel-item">
+            <img src="../img/sala.jpg" class="d-block w-100" alt="Imagen Carrusel">
+        </div>
+
         <div class="carousel-item active">
-            <img src="../img/Fondo.jpeg" class="d-block w-100" alt="Imagen Carrusel">
+            <img src="../img/personas.jpg" class="d-block w-100" alt="...">
         </div>
 
         <div class="carousel-caption d-none d-md-block">

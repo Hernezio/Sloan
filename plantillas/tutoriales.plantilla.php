@@ -1,15 +1,15 @@
 
 <!-- TITULO TUTORIALES -->
-<div class="row text-center" id="Tut">
+<div class="row text-center bg-dark" id="Tut">
     <div class="col-lg-4 col-1"></div>
     <div class="col-lg-4 col-10">
-        <h2 class="text-dark h2 fw-bold mb-4">Tutoriales</h2>
+        <h2 class="h2 fw-bold mb-4 pb-4 text-warning pt-5">Tutoriales</h2>
     </div>
     <div class="col-lg-4 col-1"></div>
 </div>
 
 <!-- VIDEO TUTORIALES -->
-<div class="row p-5 bg-dark text-white pt-3">
+<div class="row p-5 bg-dark text-warning pt-3">
     <!-- Video #1 -->
     <div class="col-sm-6 col-lg-4 p-3 text-center">
         <label class="h5 pb-1"><strong>Como generar un préstamo</strong></label>
@@ -64,4 +64,9 @@
             </div>
         </a>
     </div>     
+    <div class="text-center bg-dark text-white pt-5">
+        <h6 class="h6"> &#169; 2021 Realizado por Camilo Sánchez y Sergio Montoya</h6>
+        <h6 class="h6">Centro de Diseño y Manufactura del Cuero</h6>
+        <span><img src="../img/LogoSena.png" alt="Logo SENA" width="50"></span>
+    </div>
 </div>
