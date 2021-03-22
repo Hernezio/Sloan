@@ -108,8 +108,8 @@
                                     </td>
     								
                                     <!-- BOTONES -->
-    								<td><a href="../pdf/index.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" target="_blank" class="h5 text-success" title="Generar Informe"><i class="fas fa-file-pdf"></i></a></td>
-    								<td><a href="delete_incidencia.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" class="h6 text-danger" onclick="return confirmarEliminar()"><i class="fas fa-trash-alt"></i></a></td>
+    								<td><a href="../pdf/index.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" target="_blank" class="text-success" title="Generar Informe"><i class="fas fa-file-pdf"></i></a></td>
+    								<td><a href="delete_incidencia.php?id_incidencia= <?php echo $fila['id_incidencia']; ?>" class="text-danger" onclick="return confirmarEliminar()"><i class="fas fa-trash-alt"></i></a></td>
             					</tr>
         					<?php endforeach ?>
         				</tbody>

@@ -110,7 +110,7 @@
 				$pdf ->	SetFont('Arial', 'B', 10);
 				$pdf -> SetX(20);
 				$pdf -> Cell(2);				
-				$pdf ->	Cell(85, 6, 'Nombre Aprendiz: ' . utf8_decode($datosUsuarioDevoluciones['nombre']), 1 ,0, 'L',6 0);	
+				$pdf ->	Cell(85, 6, 'Nombre Aprendiz: ' . utf8_decode($datosUsuarioDevoluciones['nombre']), 1 ,0, 'L',6 , 0);	
 				$pdf ->	Cell(85, 6, 'Apellido Aprendiz: ' . utf8_decode($datosUsuarioDevoluciones['apellido']), 1, 0, 'L', 60);	
 				$pdf -> Ln(6);
 				
