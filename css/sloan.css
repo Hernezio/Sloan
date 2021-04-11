@@ -1,0 +1,42 @@
+.funcionNav{
+
+	max-width: 30%; 
+
+	margin-left :40%; 
+
+	margin-top: 0.5%;
+
+}
+
+.btnCrud{
+
+	max-width: 30%; 
+
+	margin-left :25%; 
+
+	margin-top: 0.5%;
+
+}
+
+.logoL{
+
+	height: 40px;
+
+	width: auto;
+
+}
+/*
+#contenedor {
+
+  position: fixed; 
+
+  height: 100px; 
+
+  bottom: 0; 
+
+  width: 100%;
+
+  display: block;
+
+
+}*/

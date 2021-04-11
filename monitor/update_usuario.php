@@ -1,77 +1,56 @@
-<?php
-
-	include_once "../conexion.php";
-
-	if (isset($_GET['id_usuario'])){
-		$id_usuario=(int)$_GET['id_usuario'];
-		$buscar_registro=$con->prepare('SELECT * FROM usuarios WHERE id_usuario= :id_usuario');
-		$buscar_registro -> execute(array(':id_usuario'=>$id_usuario));
-		$resultado= $buscar_registro -> fetch();
-	} else {
-		header('location: usuarios.php');
-	}
-
-	if (isset($_POST['btn_guardar'])){
-		$nombre=$_POST['nombre'];
-		$apellido=$_POST['apellido'];
-		$numero_carnet=$_POST['numero_carnet'];
-		$id_usuario=(int)$_GET['id_usuario'];
-		
-		if (!empty ($id_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($id_usuario)){
-			$modificar_usuario= $con-> prepare('UPDATE usuarios SET nombre=:nombre, apellido=:apellido, numero_carnet=:numero_carnet WHERE id_usuario=:id_usuario');
-			$modificar_usuario-> execute(array( 
-				':id_usuario'=>$id_usuario, 
-				':nombre'=>$nombre, 
-				':apellido'=> $apellido,
-				':numero_carnet'=>$numero_carnet
-			));
-
-			header('location: usuarios.php');
-			
-		} else {
-			echo '<script language="javascript">alert("Debes seleccionar tipo de usuario");</script>';
-		}
-	}	
-
+<?php 
+include_once "../confirmarInicio.php";
+confirmar(2);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-        
-        <!-- ICONO Font Awesome -->
-        <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-		
-		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../css/custom.css">
-		
-		<title>Préstamos Sloan</title>
-		<link rel="shortcut icon" href="../img/LogoS.png">
-
-		<!-- Scripts de Bootstrap -->
-		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
-		<script type="text/javascript" src="../js/popper.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../sweetAlert2/sweetalert2.all.min.js"></script>
-		<script type="text/javascript" src="../js/alertas.js"></script>
+		<?php 
+			$title="Actualiza usuario";
+			include_once "../plantillas/head.php";
+			include_once "../conexion.php";			
+		?>
 	</head>
-	
 	<body style="font-family: 'Noto Sans JP', sans-serif; background: -webkit-radial-gradient(top left, white, #fff4eb, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
-		
-        <!-- BARRA NAVEGACION -->
-        <?php include_once "../plantillas/navegacion.plantilla.php" ?>
+		<?php
+			if (isset($_GET['id_usuario'])){
+				$id_usuario=(int)$_GET['id_usuario'];
+				$buscar_registro=$con->prepare('SELECT * FROM usuarios WHERE id_usuario= :id_usuario');
+				$buscar_registro -> execute(array(':id_usuario'=>$id_usuario));
+				$resultado= $buscar_registro -> fetch();
+			} else {
+				header('location: usuarios.php');
+			}
 
-        <!-- Contenedor -->
-		<div class="container">
+			if (isset($_POST['btn_guardar'])){
+				$nombre=$_POST['nombre'];
+				$apellido=$_POST['apellido'];
+				$numero_carnet=$_POST['numero_carnet'];
+				$id_usuario=(int)$_GET['id_usuario'];
+
+				if (!empty ($id_usuario) && !empty ($nombre) && !empty($apellido) && !empty($numero_carnet) && !empty($id_usuario)){
+					$modificar_usuario= $con-> prepare('UPDATE usuarios SET nombre=:nombre, apellido=:apellido WHERE id_usuario=:id_usuario');
+					$modificar_usuario-> execute(array( 
+						':id_usuario'=>$id_usuario, 
+						':nombre'=>$nombre, 
+						':apellido'=> $apellido
+					));
+					echo "<script> alertOk('Usuario modificado')</script>";
+					echo '<script> window.location="usuarios.php";</script>';
+				} else {
+					echo '<script language="javascript">alertError("Debes seleccionar tipo de usuario");</script>';
+				}
+			}
+
+			// BARRA NAVEGACION 
+			include_once "../plantillas/navegacion.plantilla.php";
+		?>
+		<!-- FORMULARIO -->
+		<div class="container mt-5 mb-5 pb-5">
 			<div class="row pt-3">
 				<div class="col-2"></div>
-				<div class="col-8 mt-5">
+				<div class="col-8 mt-5 mb-4">
 					<div class="card shadow">
 						<div class="card-header text-center">
 							<div class="row text-center">
@@ -80,8 +59,6 @@
 							</div>
 						</div>
 						<div class="card-body">
-
-							<!-- Formulario con campos a modificar -->
 							<form class="row g-3 p-3" action="" method="POST">
 								<div class="col-md-4 d-none">
 									<label for="inputState" class="form-label p-2">Tipo de usuario:</label>
@@ -111,7 +88,7 @@
 								</div>
 								<div class="col-md-4">
 									<label for="inputState" class="form-label p-2">Número de carnet:</label>
-									<input class="form-control disiable" placeholder="Disabled input" aria-label="Ingrese Numero de carnet" type="text" name="numero_carnet" value="<?php if($resultado) echo $resultado['numero_carnet']; ?>" disabled>
+									<input class="form-control disiable" placeholder="Disabled input" aria-label="Ingrese Numero de carnet" type="text" name="numero_carnet" value="<?php if($resultado) echo $resultado['numero_carnet']; ?>">
 								</div>	
 								<div class="col-md-4">
 									<label for="inputState" class="form-label p-2">Nombre:</label>
@@ -129,21 +106,18 @@
 									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white mt-2 shadow">
 								</div>
 							</form>	
-
 						</div>
-						<div class="card-footer text-muted text-center pt-3">
+						<div class="card-footer text-muted text-center">
 							<div class="row align-items-center">
-
 								<!-- Botones atras y refrescar -->
 								<div class="col-6 mb-2">
-									<a href="usuarios.php" class="rounded-circle p-2 bg-success border border-3 border-white text-decoration-none mt-2">
-										<i class="fas fa-chevron-left fa-lg text-white" title="Atras"></i>
+									<a href="usuarios.php" class="btn btn-outline-success ">
+										<i class="fas fa-chevron-left fa-lg " title="Atras"></i>
 									</a>							
 								</div>
 								<div class="col-6 mb-2">
 									<a href="update_usuario.php?id_usuario=<?php if($resultado) echo $resultado['id_usuario']; ?>" name="btn_cancelar" class="btn btn-outline-success has-danger d-inline">Limpiar</a>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -152,6 +126,9 @@
 				<div class="col-2"></div>
 			</div>
 		</div>
-
+		<div class="row d-none d-sm-none d-md-none d-lg-none d-xl-block">
+			<!-- FOOTER -->
+			<?php include_once "../plantillas/footer.php" ?>
+		</div>
 	</body>
 </html>

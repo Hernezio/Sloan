@@ -1,64 +1,36 @@
-<?php  
-    
-    class Confirmar {
+<?php
 
-        private $carnet;
+  session_start();
 
-        function __construct(){
+  function confirmar($tipo){
 
-            session_start();
-			ob_start();
+    if ($_SESSION['tipo'] != $tipo){
 
-            if (isset($_SESSION['carnetUsuario'])){
-                $this -> carnet = $_SESSION['carnetUsuario'];
-            }           
-        }
+      if ($_SESSION['tipo'] == 1){
 
-        function verificar(){  
+        header('location: ../admin/home.php');
 
-            include "conexion.php";
-                      
-            $sql = "call confirmarInicioSesion(?)";
+      }
 
-            try {      
-                
-                $stmt =  $con -> prepare($sql);
-                $stmt -> bindParam(1, $this -> carnet, PDO::PARAM_STR);
-                $stmt -> execute();
 
-                $resultSet = $stmt -> fetch();
+      if ($_SESSION['tipo'] == 2){
 
-                if ($resultSet['sesion'] == "activo" ){
-                    $resultSet = true;
-                }else{
-                    $resultSet = false;
-                }
+        header('location: ../monitor/home.php');
 
-            } catch (PDOException $e) {
-                echo "error en confirmar sesion".$e-> getMessage();
-            }
+      }
 
-            return $resultSet;
-        }
+      
 
-        function cerrarSesion(){
+      if(!isset($_SESSION['tipo'])){
 
-            include "conexion.php";
+        echo "<script>alertError('No hay sesiones iniciadas');<script>";
 
-            $sesion = "inactivo";
-            
-            try {
-                
-                $stmt = $con -> prepare('call inicioSesion(?,?)');
-				$stmt -> bindParam(1, $sesion, PDO::PARAM_STR);
-				$stmt -> bindParam(2, $this -> carnet, PDO::PARAM_STR);
-                $stmt -> execute();
+        header('location: ../index.php');
 
-                header('location: index.php');
-                
-            } catch (PDOException $e) {
-                echo "error en cerrar sesion".$e-> getMessage();
-            }
-        }
+      }
+
     }
+
+  }
+
 ?>

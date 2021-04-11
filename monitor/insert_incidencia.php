@@ -1,126 +1,80 @@
 <?php
-	
-	include_once "../conexion.php";
+	include_once "../conexion.php";	
 
 	if (isset($_POST['btn_guardar'])){
+		$parametro = $_POST['id_det_devolucion'];
+		$stmt = $con -> prepare('SELECT det_devolucion.id_det_devolucion FROM det_devolucion WHERE det_devolucion.id_devolucion = :parametro');
+		$stmt -> execute(array(':parametro'=>$parametro ));
+		$resultSet = $stmt -> fetch();
+		$stmt -> closeCursor();
 
-		//no se coloca el campo primario
-		$id_det_devolucion=$_POST['id_det_devolucion'];
-		$tipo_incidencia=$_POST['tipo_incidencia'];
-		$observaciones=$_POST['observaciones'];
-		
-		if (!empty ($id_det_devolucion) && !empty ($tipo_incidencia) && !empty($observaciones)){
-			$insert_devolucion= $con-> prepare ('INSERT INTO incidencias(id_det_devolucion, tipo_incidencia, observaciones) VALUES (:id_det_devolucion, :tipo_incidencia, :observaciones)');
-			$insert_devolucion-> execute(array(
-				':id_det_devolucion'=>$id_det_devolucion, 
-				':tipo_incidencia'=>$tipo_incidencia,
-				':observaciones'=>$observaciones
-			));
+		if (!empty($resultSet)){
+			$id_det_devolucion= $resultSet['id_det_devolucion'];
+			$tipo_incidencia=$_POST['tipo_incidencia'];
+			$observaciones=$_POST['observaciones'];
 
-			header('location: inciencia.php');
-
-		} else {
-			echo '<script language="javascript">alert("Debe seleccionar detalle de devolución y el tipo de incidencia");</script>';
+			try {
+				if (!empty ($id_det_devolucion) && !empty ($tipo_incidencia) && !empty($observaciones)){
+					$insert_devolucion= $con-> prepare ('INSERT INTO incidencias(id_det_devolucion, tipo_incidencia, observaciones) VALUES (:id_det_devolucion, :tipo_incidencia, :observaciones)');
+					$insert_devolucion-> execute(array(
+						':id_det_devolucion'=>$id_det_devolucion, 
+						':tipo_incidencia'=>$tipo_incidencia,
+						':observaciones'=>$observaciones
+					));	
+					echo '<script language="javascript">alertOk("Incidencia creada"); </script>';
+					echo '<script type="text/javascript">window.location="incidencia.php";</script>';
+				} else {
+					echo '<script language="javascript">alertError("Debe seleccionar detalle de devolución y el tipo de incidencia");</script>';
+				}
+			} catch (PDOException $e) {
+				if ($e = "SQLSTATE[23000]"){
+					echo '<script language="javascript">alertError("Ya existe incidencia con este numero de devolución");</script>';
+				}
+			}				
 		}
 	}
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-	<head>
-		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-        
-        <!-- ICONO Font Awesome -->
-        <script src="https://kit.fontawesome.com/9f429f9981.js" crossorigin="anonymous"></script>
-		
-		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../css/custom.css">
-		
-		<title>Préstamos Sloan</title>
-		<link rel="shortcut icon" href="../img/LogoS.png">
-	</head>
-	
-	<body style="font-family: 'Noto Sans JP', sans-serif; background: -webkit-radial-gradient(top left, white, #fff4eb, white);  background-size:cover; height: 100%; background-attachment: fixed; ">
-        
-        <!-- BARRA NAVEGACION -->
-        <?php include_once "../plantillas/navegacion.plantilla.php" ?>    
-        
-        <!-- Contenedor -->
-		<div class="container mt-5 mb-5">
-			<div class="row pt-3">
-				<div class="col-2"></div>
-				<div class="col-8 mt-3">
-					<div class="card shadow">
-						<div class="card-header text-center">
-							<div class="row text-center">
-								<h2 class="h2 text-success" style="font-family: 'Noto Sans JP', sans-serif;">Generar Incidencia</h2>
-							</div>
-						</div>
-						<div class="card-body">
-
-							<!-- Formulario con campos a insertar -->
-							<form class="row g-3 p-3" action="" method="POST">
-								<div class="col-md-6">
-									<label for="inputState" class="form-label p-2">Detalle de devolución:</label>
-									<select id="inputState" class="form-select" name="id_det_devolucion">
-										<option  value="0" selected>Seleccione detalle de devolución</option>
-										<?php 
-											$query = $con -> prepare("SELECT * FROM det_devolucion");
-											$query -> execute();
-											foreach ($query as $key ) {
-												echo '<option value ="'.$key[id_det_devolucion].'">'.$key[id_devolucion].'</option>';					 	
-											} 
-										?>
-									</select>
-								</div>
-								<div class="col-md-6">
-									<label for="inputState" class="form-label p-2">Daño o Perdida?</label>
-									<select class="form-select" name="tipo_incidencia" id="inputState">
-										<option value="0">Seleccione una opción</option>
-										<option value="1">Daño</option>
-										<option value="2">Perdida</option>
-									</select>
-								</div>
-								<div class="col-12">
-									<label for="inputState" class="form-label p-2">Observaciones:</label>
-									<textarea class="form-control" name="observaciones" placeholder="Digite el motivo de la incidencia" required></textarea>		
-								</div>
-								<div class="col-12 text-center">
-									<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white mt-2 shadow">
-								</div>
-							</form>	
-
-						</div>
-						<div class="card-footer text-muted text-center pt-3">
-							<div class="row align-items-center">
-
-								<!-- Botones atras y refrescar -->
-								<div class="col-6 mb-2">
-									<a href="inciencia.php" class="rounded-circle p-2 bg-success border border-3 border-white text-decoration-none mt-2">
-										<i class="fas fa-chevron-left fa-lg text-white" title="Atras"></i>
-									</a>							
-								</div>
-								<div class="col-6 mb-2">
-									<a href="insert_incidencia.php" name="btn_cancelar" class="btn btn-outline-success has-danger d-inline">Limpiar</a>
-								</div>
-
-							</div>
-						</div>
+<!-- MODAL PARA AGREGAR INCIDENCIAS -->
+<div id="incidencias" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- TITLE MODAL -->
+			<div class="modal-header bg-success text-center">
+				<h4 class="modal-title text-light ">Agregar Nueva incidencia</h4>
+			</div>
+			<!-- BODY MODAL -->
+			<div class="modal-body">
+				<form class="row g-3 p-3" action="" method="POST">
+					<div class="col-md-6">
+						<label for="inputState" class="form-label p-2">Id devolución</label>
+						<input type="text" id="text" class="form-control" name="id_det_devolucion" placeholder="Id devolución" required>
 					</div>
-				</div>
-				<!-- Columna vacia, está ahí para el correcto funcionamiento del diseño responsive -->
-				<div class="col-2"></div>
+					<div class="col-md-6">
+						<label for="inputState" class="form-label p-2">Daño o Perdida?</label>
+						<select class="form-select" name="tipo_incidencia" id="inputState">
+							<option value="0">Seleccione una opción</option>
+							<option value="1">Daño</option>
+							<option value="2">Perdida</option>
+						</select>
+					</div>
+					<div class="col-12">
+						<label for="inputState" class="form-label p-2">Observaciones:</label>
+						<textarea class="form-control" name="observaciones" placeholder="Digite el motivo de la incidencia" required></textarea>		
+					</div>
+					<div class="col-12 text-center">
+						<input type="submit" name="btn_guardar" value="Guardar" class="btn btn-success text-white mt-2 shadow">
+					</div>
+				</form>	
+			</div>
+			<!-- FOOTER MODAL -->
+			<div class="modal-footer">
+				<div class="row align-items-center">					
+					<div class="col-6 mb-2">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>							
+					</div>				
+				</div>					
 			</div>
 		</div>
-
-		<!-- Scripts de Bootstrap -->
-		<script type="text/javascript" src="../js/jquery-3.5.1.slim.min.js"></script>
-		<script type="text/javascript" src="../js/popper.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	</body>
-</html>
+	</div>
+</div>

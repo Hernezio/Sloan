@@ -1,9 +1,6 @@
 <?php
-	
-	include_once "confirmarInicio.php";
-    $cerrar = new Confirmar();
-    $cerrar  -> cerrarSesion();
-
-    session_destroy();
-
+  session_start();
+  
+  session_destroy();
+  header ('location: index.php')
 ?>
