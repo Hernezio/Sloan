@@ -1,4 +1,4 @@
-<div class="container-fluid position-absolute top-100 end-0 mt-5" id="contenedor">
+<div class="container-fluid position-absolute top-100 end-0 mt-5 pt-5" id="contenedor">
 
 	<div class="row bg-dark text-warning pb-1 pt-1 ">        
 
@@ -20,18 +20,17 @@
 
 	$(document).ready(function () {
 
-		$('.sidebar-menu').tree()
+		$('.sidebar-menu').tree();
 
 	})
 
 	$(function () { 
 
+
 		$('#dataTable').DataTable({
 
 
-
 			"language": {
-
 				"decimal":        ".",
 
 				"emptyTable":     "No tenemos datos para mostrar",
@@ -46,7 +45,7 @@
 
 				"thousands":      "'",
 
-				"lengthMenu":     "Mostrar _MENU_ Entradas",
+				"lengthMenu":     "",
 
 				"loadingRecords": "Cargando...",
 
@@ -71,14 +70,12 @@
 				"aria": {
 
 					"sortAscending":  ": ordenar de manera Ascendente",
-
 					"sortDescending": ": ordenar de manera Descendente ",
 
 				}
-
 			}
 
-		})
+		});
 
 	});
 

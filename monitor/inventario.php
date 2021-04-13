@@ -41,7 +41,7 @@
     <div class="container mt-1 mb-5">
       <div class="row pt-5">
         <div class="col-12 table-responsive">
-          <table id ="dataTable"  class="table table-striped table-hover text-white shadow mb-5 bg-white rounded">
+          <table id ="dataTable" class="table table-striped table-hover text-white shadow mb-5 bg-white rounded">
             <thead>
               <tr class="text-center text-dark">
                 <th class="fw-bold" scope="col">Nº Artículo</th>

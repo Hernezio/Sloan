@@ -20,7 +20,7 @@
 						$sentencia_select->execute();											
 						$codigo=$sentencia_select->fetch();
 						
-						if(isset($carnet['id_usuario'])&& isset($codigo['id_articulo'])){
+						if(isset($carnet['id_usuario']) && isset($codigo['id_articulo'])){
 						    $idA =$codigo['id_articulo'];
 						    $idU =$carnet['id_usuario'];
 						}

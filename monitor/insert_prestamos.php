@@ -5,29 +5,21 @@
     $sentencia_select->bindParam(1, $_POST['carnetPrestamo'], PDO::PARAM_INT);
     $sentencia_select->execute();											
     $carnet=$sentencia_select->fetch();
+    $sentencia_select->closeCursor();
+    
     $sentencia_select=$con->prepare('call codigo_barras(?)');
     $sentencia_select->bindParam(1, $_POST['codigoBArticulo'], PDO::PARAM_INT);
     $sentencia_select->execute();											
     $codigo=$sentencia_select->fetch();
+    $sentencia_select->closeCursor();
 
-    // lleva los input a dos variables para lluego llevarlas a el procedimiento almacenado
-    if (isset($codigo['id_articulo']) && isset($carnet['id_usuario'])){
-        $id_articulo=$codigo['id_articulo'];
-        $id_usuario=$carnet['id_usuario'];
-    }
     
-    if (!empty ($id_usuario) && !empty ($id_articulo)) {
-      // traer tabla articulo para comparar
-      $sentencia_select = $con->prepare('SELECT * FROM articulos ORDER BY id_articulo DESC');
-      $sentencia_select->execute();
-      $estado=$sentencia_select->fetchAll();
-     
-        //comparar articulo con metodo post para saber si esta diponible
-        // este if confirma que el articulo se pueda prestar
-        $disponibilidad = $codigo['disponibilidad'];
-        $estadoArticulo = $codigo['estado'];
-
-        if ($disponibilidad == 1 && $estadoArticulo == 1) {
+    if (isset($codigo['id_articulo']) && isset($carnet['id_usuario'])){
+        
+        $id_articulo=$codigo['id_articulo'];
+         $id_usuario=$carnet['id_usuario'];
+         
+        if ($codigo['disponibilidad'] == 1 && $codigo['estado'] == 1) {
           //este if confirma que el usuario pueda prestar
           if ($carnet['tipo_usuario']== 3 || $carnet['tipo_usuario']== 4 ){
             try {

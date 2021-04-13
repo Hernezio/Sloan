@@ -93,7 +93,7 @@
     <div class="container mt-1 mb-5">
       <div class="row pt-5">
         <div class="col-12">
-          <table id ="dataTable" class="table table-striped table-hover shadow bg-white rounded">
+          <table id ="dataTable" class="table table-striped table-hover mb-5 shadow bg-white rounded">
             <thead>
               <tr class="text-center">
                 <th class="fw-bold" scope="col">Nº Préstamo</th>

@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require ('fpdf/fpdf.php');	
 
 	class IncidenciaPdf extends FPDF {
@@ -116,8 +117,17 @@
 				$pdf ->	Cell(2);				
 				$pdf ->	Cell(65, 6, 'Nombe Articulo: ' . utf8_decode($datosUsuarioDevoluciones['nombre_articulo']), 1, 0, 'L', 60);
 				$pdf ->	Cell(65, 6, 'Id Articulo: ' . utf8_decode($datosUsuarioDevoluciones['codigo_barras']), 1, 0, 'L', 60);
+				$pdf -> Ln(10);
+
+				$pdf -> SetX(75);
+				$pdf ->	SetFont('Arial','',10);				
+				$pdf -> Write(16, utf8_decode('Informe exportado por: ' . $_SESSION['nombre'] . '' . $_SESSION['apellido']));
+				$pdf -> Ln(5);
+
+				$pdf -> SetX(90);
+				$pdf ->	SetFont('Arial','',10);				
+				$pdf -> Write(16, utf8_decode('Fecha: 16/04/2021'));
 				$pdf -> Ln(100);
-				$pdf -> Ln(15);
 
 				$pdf -> AliasNbPages();
 				$pdf -> Cell(0,10, 'Pagina '.$pdf->PageNo() . '/{nb}', 0, 0, 'C');
